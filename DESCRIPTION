@@ -1,0 +1,33 @@
+Package: ATACCoGAPS
+Title: Analysis Tools for scATACseq Data with CoGAPS
+Version: 0.9.0
+Authors@R: 
+    person(given = "Rossin",
+           family = "Erbe",
+           role = c("aut", "cre"),
+           email = "rerbe1@jhmi.edu")
+Description: Provides tools for running the CoGAPS algorithm (Fertig et al, 2010) on scATAC sequencing data and for analysis of the results. 
+License: GPL-2
+Depends:
+  R (>= 3.5.0),
+  CoGAPS
+Imports:
+    gtools,
+    GenomicRanges,
+    projectR,
+    TFBSTools,
+    GeneOverlap,
+    msigdbr,
+    tidyverse,
+    gplots,
+    motifmatchr,
+    chromVAR,
+    GenomicFeatures,
+    IRanges,
+    Homo.sapiens,
+    Mus.musculus
+RoxygenNote: 6.1.1
+Encoding: UTF-8
+Suggests: 
+    knitr
+VignetteBuilder: knitr
