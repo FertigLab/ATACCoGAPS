@@ -28,3 +28,20 @@ Wrapper function for projectR which finds overlaps between the peaks of the
 atac data CoGAPS was run on and maps them to new data set the user wishes to
 project learned patterns into.
 }
+\examples{
+data(schepCogapsResult)
+data(schepFilteredPeaks)
+data(schepGranges)
+
+
+#getting count matrix - peaks x cells
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroFinalSubsetData.Rdata?raw=true")
+
+#getting GRanges for peaks
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroGRanges.Rdata?raw=true")
+
+#getting celltypes
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroCellTypes.Rdata?raw=true")
+
+projectRResults <- ATACTransferLearning(newData = BuenrostroFinalSubsetData, CoGAPSResult = schepCogapsResult, originalPeaks = schepFilteredPeaks, originalGranges = schepGranges,newGranges = BuenrostroGRanges)
+}
