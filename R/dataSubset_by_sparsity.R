@@ -11,6 +11,12 @@
 #' @param peak_cut threshold of sparsity to filter at for peaks
 #' @return nested list containing the subset data, a list of peaks, and list of
 #'   cells
+#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/schepATACPreFilter.Rdata?raw=true")
+#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/schepUnfilteredCells.Rdata?raw=true")
+#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/schepUnfilteredPeaks.Rdata?raw=true")
+#' 
+#' dataSubset = dataSubsetBySparsity(data = schepATACPreFilter, cell_list = schepUnfilteredCells, peak_list = schepUnfilteredPeaks, cell_cut = 0.99, peak_cut = 0.99)
+#' 
 #' @export
 dataSubsetBySparsity = function(data, cell_list, peak_list, cell_cut = 0.99, peak_cut = 0.99) {
 
