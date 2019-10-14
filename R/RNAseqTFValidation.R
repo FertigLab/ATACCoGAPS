@@ -20,6 +20,7 @@
 #' @examples \dontrun{
 #' gseaList = RNAseqTFValidation(TFMatchResult$RegulatoryNetworks, RNACoGAPS, c(1,3), c(2,7), matrix = FALSE)
 #' }
+#' @export
 
 RNAseqTFValidation = function(TFGenes, RNACoGAPSResult, ATACPatternSet, 
                               RNAPatternSet, matrix = FALSE) {
