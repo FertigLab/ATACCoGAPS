@@ -1,6 +1,6 @@
 # ATACCoGAPS
 
-Package to preprocess ATACseq data for CoGAPS and analyze the results.
+Package which provides tools for processing and analysis of single-cell ATAC-seq data with the Bayesian Non-Negative Matrix Factorization algorithm, CoGAPS.
 
 Install the most recent version of CoGAPS in R via:
 
