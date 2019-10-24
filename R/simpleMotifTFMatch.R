@@ -39,7 +39,7 @@ simpleMotifTFMatch = function(cogapsResult, numregions, generanges, organism,
 
   jMotifs = chromVAR::getJasparMotifs(organism)
   #call motifPatternMatch
-  patternJMotifs = motifPatternMatch(cogapsResult, 25, generanges, jMotifs,
+  patternJMotifs = motifPatternMatch(cogapsResult, numregions, generanges, jMotifs,
                                      genome, motifsPerRegion)
   #make lists of all relevant info to return
   tfNameList = vector("list", length(patternJMotifs))
