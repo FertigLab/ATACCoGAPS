@@ -16,6 +16,9 @@
 #'   pattern
 #' @param colColors column-wise colors for distinguishing celltypes. If NULL,
 #'   will be generated randomly
+#' @param rowColors row-wise colors for distinguishing patterns. If NULL will be
+#'   generated randomly
+#' @param patterns which patterns should be plotted, if NULL all will be plotted
 #' @param seed random seed for generating colors for plot; for reproducibility
 #' @param order option whether to sort the data by celltype before plotting,
 #'   TRUE by default
@@ -30,13 +33,14 @@
 #' @export
 
 heatmapPatternMarkers = function(cgaps_result, atac_data, celltypes, numregions,
-                                 colColors = NULL, seed = 42, order = TRUE,...) {
+                                 colColors = NULL, rowColors = NULL, patterns = NULL,
+                                 seed = 42, order = TRUE,...) {
 
   #convert atac read data to binary matrix
   binary_atac = (atac_data > 0) + 0 #this line works because R represents TRUE/FALSE as 1/0
 
   #get regions corresponding to most elevated PatternMarker results
-  patMarkers = CoGAPS::patternMarkers(cgaps_result,  threshold = "cut")
+  patMarkers = CoGAPS::patternMarkers(cgaps_result)
   patRanks = as.data.frame(patMarkers[2])
   chr_regions = rownames(patRanks)
   regionPatList = vector(mode=  "list", length = ncol(patRanks))
@@ -44,24 +48,28 @@ heatmapPatternMarkers = function(cgaps_result, atac_data, celltypes, numregions,
     topPeaksPat = order(patRanks[,i])[seq(numregions)]
     regionPatList[[i]] = topPeaksPat
   }
-
+  
+  if(is.null(patterns)){
+    patterns = seq_along(regionPatList)
+  }
   #subset the regions most differentially accessible for each pattern from the original data
   allPatSubset = data.frame()
-  for(i in seq_along(regionPatList)) {
+  for(i in patterns) {
     temppatsub = as.matrix(binary_atac[unlist(regionPatList[i]),])
     allPatSubset = rbind(allPatSubset, temppatsub)
   }
 
   allPatSubset = as.matrix(allPatSubset)
 
-
-  #produce vectors of colors for visualizing patterns in the heatmap
-  rainCols = rainbow(ncol(patRanks))
-  rowColors = character(ncol(patRanks)*numregions)
+  if(is.null(rowColors)){
+    #produce vectors of colors for visualizing patterns in the heatmap
+    rowColors = rainbow(ncol(patRanks))
+  }
+  rowCols = character(length(patterns)*numregions)
   j=1
-  for(i in seq(ncol(patRanks))){
-    color = rep(rainCols[i], numregions)
-    rowColors[j:(j+numregions-1)] = color
+  for(i in patterns){
+    color = rep(rowColors[i], numregions)
+    rowCols[j:(j+numregions-1)] = color
     j=j+numregions
   }
 
@@ -70,7 +78,7 @@ heatmapPatternMarkers = function(cgaps_result, atac_data, celltypes, numregions,
   if(order == TRUE) {
   #order the data by celltype
   allPatSubset = rbind(allPatSubset, celltypes)
-  ind = (numregions*ncol(patRanks))+1
+  ind = (numregions*length(patterns))+1
   allPatSubset = allPatSubset[,order(allPatSubset[ind,])]
   allPatSubset = allPatSubset[-c(ind),]
   }
@@ -100,6 +108,6 @@ heatmapPatternMarkers = function(cgaps_result, atac_data, celltypes, numregions,
   #plot heatmap using gplots package
   gplots::heatmap.2(allPatSubset, density.info="none", trace="none",
                     dendrogram='none', Rowv=FALSE, Colv=FALSE,
-                    RowSideColors = rowColors, ColSideColors = colColors,
+                    RowSideColors = rowCols, ColSideColors = colColors,
                     labRow = NA, labCol = NA, ...)
 }

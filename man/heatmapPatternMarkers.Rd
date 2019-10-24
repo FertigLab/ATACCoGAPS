@@ -5,7 +5,8 @@
 \title{Create Heatmap of PatternMarker Peaks}
 \usage{
 heatmapPatternMarkers(cgaps_result, atac_data, celltypes, numregions,
-  colColors = NULL, seed = 42, order = TRUE, ...)
+  colColors = NULL, rowColors = NULL, patterns = NULL, seed = 42,
+  order = TRUE, ...)
 }
 \arguments{
 \item{cgaps_result}{CogapsResult object from CoGAPS run}
@@ -20,6 +21,11 @@ pattern}
 
 \item{colColors}{column-wise colors for distinguishing celltypes. If NULL,
 will be generated randomly}
+
+\item{rowColors}{row-wise colors for distinguishing patterns. If NULL will be
+generated randomly}
+
+\item{patterns}{which patterns should be plotted, if NULL all will be plotted}
 
 \item{seed}{random seed for generating colors for plot; for reproducibility}
 

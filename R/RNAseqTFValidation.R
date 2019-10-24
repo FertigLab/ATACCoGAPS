@@ -26,7 +26,7 @@ RNAseqTFValidation = function(TFGenes, RNACoGAPSResult, ATACPatternSet,
                               RNAPatternSet, matrix = FALSE) {
   
   if(matrix == FALSE) {
-  patMarkers = patternMarkers(RNACoGAPSResult, threshold = "cut")
+  patMarkers = patternMarkers(RNACoGAPSResult)
   genesRanks =patMarkers$PatternMarkerRanks
   }
   else{

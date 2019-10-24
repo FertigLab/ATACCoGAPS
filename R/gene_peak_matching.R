@@ -115,7 +115,7 @@ geneMatch = function(regionIndex, generanges, genome) {
 genePatternMatch = function(cogapsResult, numregions, generanges, genome) {
 
   #get PatternMarker peak indices
-  patMarkers = CoGAPS::patternMarkers(cogapsResult,  threshold = "cut")
+  patMarkers = CoGAPS::patternMarkers(cogapsResult)
   patRanks = as.data.frame(patMarkers[2])
   chr_regions = rownames(patRanks)
   regionPatList = vector(mode=  "list", length = ncol(patRanks))

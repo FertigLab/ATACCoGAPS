@@ -32,7 +32,7 @@ paths = function(patGenes, pathways, pval_cut, pAdjustMethod) {
 #' @param gene_list Result from the genePatternMatch function, a list of genes
 #'   for each pattern
 #' @param pathways List of pathways to perform gene enrichment on. Recommended
-#'   to download using msigdbr
+#'   to download using msigdbr (see examples)
 #' @param p_threshold significance level to use in enrichment analysis
 #' @param pAdjustMethod multiple testing correction method to apply using the
 #'   p.adjust options (e.g. "BH")
@@ -43,7 +43,8 @@ paths = function(patGenes, pathways, pval_cut, pAdjustMethod) {
 #' data(schepGranges)
 #'
 #' genes = genePatternMatch(schepCogapsResult, 500, schepGranges, Homo.sapiens)
-#'
+#' 
+#' library(dplyr)
 #' pathways = msigdbr::msigdbr(species = "Homo sapiens", category =
 #'                              "H") %>% dplyr::select(gs_name, gene_symbol) %>% as.data.frame()
 #'

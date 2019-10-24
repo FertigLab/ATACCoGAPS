@@ -18,6 +18,7 @@
 #' @param matrix if false cgaps_result is interpreted as a CoGAPSResult object,
 #'   if true it is interpreted as the pattern matrix being input directly
 #' @param seed random seed to generate colors; for reproducibility
+#' @param rowColors vector of colors to plot along patterns, if NULL generated automatically
 #' @param ... additional arguments to the heatmap.2 function
 #' @return Heatmap of patternMatrix with color labels for samples
 #' @examples data(schepCogapsResult)
@@ -27,7 +28,7 @@
 #' @export
 heatmapPatternMatrix = function(cgaps_result, sample.classifier, cellCols = NULL,
                                 sort = TRUE, patterns = NULL, matrix = FALSE,
-                                seed = 42, ...) {
+                                rowColors = NULL, seed = 42, ...) {
 
   #if inputting the pattern matrix rather than full cogaps object
   if(matrix == TRUE) {
@@ -58,10 +59,11 @@ heatmapPatternMatrix = function(cgaps_result, sample.classifier, cellCols = NULL
     nPatterns = ncol(samplePatterns)
     patterns = seq(nPatterns)
   }
-
-  #produce vectors of colors for visualizing patterns in the heatmap
-  rowColors = rainbow(length(patterns))
-
+  
+  if(is.null(rowColors)) {
+    #produce vectors of colors for visualizing patterns in the heatmap
+    rowColors = rainbow(length(patterns))
+  }
 
   #sort all samples so samples of the same factor are adjacent in the plot
   #if sort == TRUE

@@ -6,7 +6,8 @@ patternAccessibleMotifs = function(pattern, generanges, motifs, genome,
   patRanges = generanges[pattern]
 
   #use motifmatchr to match motifs to regions
-  matchedmotifs = motifmatchr::matchMotifs(motifs, patRanges, genome = genome, out = "scores")
+  matchedmotifs = motifmatchr::matchMotifs(motifs, patRanges, genome = genome,
+                                           out = "scores")
   motif.scores = motifmatchr::motifScores(matchedmotifs)
   motifIDs = TFBSTools::ID(motifs)
 
@@ -49,7 +50,7 @@ motifPatternMatch = function(cogapsResult, numregions, generanges, motiflist,
                              genome, motifsPerRegion = 1) {
 
   #get PatternMarker peak indices
-  patMarkers = CoGAPS::patternMarkers(cogapsResult,  threshold = "cut")
+  patMarkers = CoGAPS::patternMarkers(cogapsResult)
   patRanks = as.data.frame(patMarkers[2])
   chr_regions = rownames(patRanks)
   regionPatList = vector(mode=  "list", length = ncol(patRanks))
