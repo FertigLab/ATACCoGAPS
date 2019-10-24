@@ -12,7 +12,7 @@ pathwayMatch(gene_list, pathways, p_threshold = 0.05,
 for each pattern}
 
 \item{pathways}{List of pathways to perform gene enrichment on. Recommended
-to download using msigdbr}
+to download using msigdbr (see examples)}
 
 \item{p_threshold}{significance level to use in enrichment analysis}
 
@@ -33,6 +33,7 @@ data(schepGranges)
 
 genes = genePatternMatch(schepCogapsResult, 500, schepGranges, Homo.sapiens)
 
+library(dplyr)
 pathways = msigdbr::msigdbr(species = "Homo sapiens", category =
                              "H") \%>\% dplyr::select(gs_name, gene_symbol) \%>\% as.data.frame()
 

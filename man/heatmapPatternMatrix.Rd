@@ -5,7 +5,8 @@
 \title{Plot the patternMatrix as a heatmap}
 \usage{
 heatmapPatternMatrix(cgaps_result, sample.classifier, cellCols = NULL,
-  sort = TRUE, patterns = NULL, matrix = FALSE, seed = 42, ...)
+  sort = TRUE, patterns = NULL, matrix = FALSE, rowColors = NULL,
+  seed = 42, ...)
 }
 \arguments{
 \item{cgaps_result}{CoGAPSResult object from a CoGAPS run or the pattern
@@ -26,6 +27,8 @@ patterns are plotted}
 
 \item{matrix}{if false cgaps_result is interpreted as a CoGAPSResult object,
 if true it is interpreted as the pattern matrix being input directly}
+
+\item{rowColors}{vector of colors to plot along patterns, if NULL generated automatically}
 
 \item{seed}{random seed to generate colors; for reproducibility}
 
