@@ -12,7 +12,8 @@ RNAseqTFValidation(TFGenes, RNACoGAPSResult, ATACPatternSet, RNAPatternSet,
 or findRegulatoryNetworks()}
 
 \item{RNACoGAPSResult}{CoGAPSResult object from matched RNA-seq data, or, if
-matrix = TRUE, a matrix containing patternMarker gene ranks}
+matrix = TRUE, a matrix containing patternMarker gene ranks. Must contain
+gene names}
 
 \item{ATACPatternSet}{vector of patterns found by CoGAPS in the ATAC data to
 match against patterns found in RNA}

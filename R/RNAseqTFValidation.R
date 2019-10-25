@@ -8,7 +8,8 @@
 #' @param TFGenes genes regulated by the TFs as returned by simpleMotifTFMatch()
 #'   or findRegulatoryNetworks()
 #' @param RNACoGAPSResult CoGAPSResult object from matched RNA-seq data, or, if
-#'   matrix = TRUE, a matrix containing patternMarker gene ranks
+#'   matrix = TRUE, a matrix containing patternMarker gene ranks. Must contain
+#'   gene names
 #' @param ATACPatternSet vector of patterns found by CoGAPS in the ATAC data to
 #'   match against patterns found in RNA
 #' @param RNAPatternSet vector of patterns found by CoGAPS in RNA to match
@@ -26,8 +27,8 @@ RNAseqTFValidation = function(TFGenes, RNACoGAPSResult, ATACPatternSet,
                               RNAPatternSet, matrix = FALSE) {
   
   if(matrix == FALSE) {
-  patMarkers = patternMarkers(RNACoGAPSResult)
-  genesRanks =patMarkers$PatternMarkerRanks
+  patMarkers = CoGAPS::patternMarkers(RNACoGAPSResult)
+  genesRanks = patMarkers$PatternMarkerRanks
   }
   else{
     genesRanks = RNACoGAPSResult
