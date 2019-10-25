@@ -76,7 +76,7 @@ heatmapPatternMatrix = function(cgaps_result, sample.classifier, cellCols = NULL
                       dendrogram='none', Rowv=NULL, Colv=NULL,
                       RowSideColors = rowColors,
                       ColSideColors = cellCols[as.numeric(sample.classifier[order(sample.classifier)])],
-                      labRow = NA, labCol = NA, ...)
+                      labRow = NA, labCol = as.character(sort(sample.classifier)), ...)
   }
 
   else{
@@ -86,7 +86,7 @@ heatmapPatternMatrix = function(cgaps_result, sample.classifier, cellCols = NULL
                       dendrogram='none', Rowv=NULL, Colv=NULL,
                       RowSideColors = rowColors,
                       ColSideColors = cellCols[as.numeric(sample.classifier)],
-                      labRow = NA, labCol = NA, ...)
+                      labRow = NA, labCol = sort(sample.classifier), ...)
 
   }
 

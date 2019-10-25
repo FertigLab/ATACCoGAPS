@@ -1,9 +1,9 @@
 #function to produce the gene objects for comparison to the genomic ranges
 #from the data
-#db = organism TxDb with gene symbols
-geneRanges = function(db) {
+#txdb = organism TxDb with gene symbols
+geneRanges = function(txdb) {
   #get granges with gene symmbol metadata
-  g = GenomicFeatures::genes(db, columns="SYMBOL")
+  g = GenomicFeatures::genes(txdb, columns="SYMBOL")
   col = mcols(g)[["SYMBOL"]]
   #create GRanges without metadata to make gene symbols character vector
   genes = GenomicRanges::granges(g)[rep(seq_along(g), elementNROWS(col))]
@@ -12,7 +12,7 @@ geneRanges = function(db) {
 }
 
 #function to find genes within the top genomic regions
-splitByOverlap = function(query, subject) {
+findOverlap = function(query, subject) {
   #find the overlaps between the GRanges containing peak regions and the GRanges
   #of known genes
   olaps = GenomicRanges::findOverlaps(query, subject, ignore.strand = TRUE)
@@ -56,9 +56,9 @@ geneMatch = function(regionIndex, generanges, genome) {
   patRanges = generanges[regionIndex]
 
   gns = geneRanges(genome)
-  genesInPatTmp = splitByOverlap(gns, patRanges)
+  genesInPatTmp = findOverlap(gns, patRanges)
 
-  #convert output of splitByOverlap into a normal list
+  #convert output of findOverlap into a normal list
   #add names to each element for the patternMarker peak it's within
   genesInPat = c()
   for(i in seq_along(genesInPatTmp)){
