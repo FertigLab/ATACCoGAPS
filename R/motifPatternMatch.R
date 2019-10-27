@@ -92,7 +92,7 @@ getTFs = function(motifList, tfData) {
   summaryList = vector("list", length(motifList))
   #iterate over motifs for each pattern and find matches in tfData
   for(i in seq_along(motifList)) {
-    match_info = tf_info[which(tfData$Motif_ID %in% unlist(motifList[[i]])),]
+    match_info = tfData[which(tfData$Motif_ID %in% unlist(motifList[[i]])),]
     TfNames = match_info$TF_Name
     TF.fct = as.factor(TfNames)
     #summary of the family that the TFs belong to
