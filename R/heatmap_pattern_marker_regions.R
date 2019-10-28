@@ -12,8 +12,9 @@
 #' @param atac_data a numeric matrix of the ATAC data input to CoGAPS
 #' @param celltypes a list or factor of celltypes corresponding to the positions
 #'   of those cells in the atac_data matrix
-#' @param numregions number of chromosomal regions to plot for each CoGAPS
-#'   pattern
+#' @param numregions number of chromosomal regions/peaks to plot for each CoGAPS
+#'   pattern. Default is 50. Plotting very large numbers of regions can cause
+#'   significant slowdown in runtime
 #' @param colColors column-wise colors for distinguishing celltypes. If NULL,
 #'   will be generated randomly
 #' @param rowColors row-wise colors for distinguishing patterns. If NULL will be
@@ -32,7 +33,7 @@
 #'                       celltypes = schepCelltypes, numregions = 50)
 #' @export
 
-heatmapPatternMarkers = function(cgaps_result, atac_data, celltypes, numregions,
+heatmapPatternMarkers = function(cgaps_result, atac_data, celltypes, numregions = 50,
                                  colColors = NULL, rowColors = NULL, patterns = NULL,
                                  seed = 42, order = TRUE,...) {
 
@@ -106,12 +107,12 @@ heatmapPatternMarkers = function(cgaps_result, atac_data, celltypes, numregions,
   }
 
   if(order == TRUE) {
-    gplots::heatmap.2(genePeaks, density.info="none", trace="none",
+    gplots::heatmap.2(allPatSubset, density.info="none", trace="none",
                       dendrogram='none', Rowv=FALSE, Colv=FALSE, ColSideColors = colColors,
                       labRow = NA, labCol = as.character(sort(celltypes)), ...)
   }
   else {
-    gplots::heatmap.2(genePeaks, density.info="none", trace="none",
+    gplots::heatmap.2(allPatSubset, density.info="none", trace="none",
                       dendrogram='none', Rowv=FALSE, Colv=FALSE, ColSideColors = colColors,
                       labRow = NA, labCol = as.character(celltypes), ...)
   }

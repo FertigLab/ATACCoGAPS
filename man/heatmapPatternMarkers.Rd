@@ -4,9 +4,9 @@
 \alias{heatmapPatternMarkers}
 \title{Create Heatmap of PatternMarker Peaks}
 \usage{
-heatmapPatternMarkers(cgaps_result, atac_data, celltypes, numregions,
-  colColors = NULL, rowColors = NULL, patterns = NULL, seed = 42,
-  order = TRUE, ...)
+heatmapPatternMarkers(cgaps_result, atac_data, celltypes,
+  numregions = 50, colColors = NULL, rowColors = NULL,
+  patterns = NULL, seed = 42, order = TRUE, ...)
 }
 \arguments{
 \item{cgaps_result}{CogapsResult object from CoGAPS run}
@@ -16,8 +16,9 @@ heatmapPatternMarkers(cgaps_result, atac_data, celltypes, numregions,
 \item{celltypes}{a list or factor of celltypes corresponding to the positions
 of those cells in the atac_data matrix}
 
-\item{numregions}{number of chromosomal regions to plot for each CoGAPS
-pattern}
+\item{numregions}{number of chromosomal regions/peaks to plot for each CoGAPS
+pattern. Default is 50. Plotting very large numbers of regions can cause
+significant slowdown in runtime}
 
 \item{colColors}{column-wise colors for distinguishing celltypes. If NULL,
 will be generated randomly}
