@@ -28,11 +28,22 @@ geneAccessibility <- function(geneList, peakGranges, atacData, genome) {
   
   listedGenes <- genes[geneInds]
   olaps <- vector("list", length(listedGenes))
+  toRemove <- NULL
   for(i in seq_along(listedGenes)) {
     olap <- GenomicRanges::findOverlaps(listedGenes[i], peakGranges,
                                         ignore.strand = TRUE)
     olapInds <- subjectHits(olap)
-    olaps[[i]] <- olapInds
+    if(length(olapInds) == 0) {
+      print(paste("No overlapping peaks with", mcols(listedGenes)[["SYMBOL"]][i]))
+      toRemove <- i
+    }
+    else{
+      olaps[[i]] <- olapInds
+    }
+  }
+  
+  if(!is.null(toRemove)){
+    olaps[[toRemove]] <- NULL
   }
   
   binaryATAC <- (atacData > 0) + 0
@@ -42,8 +53,14 @@ geneAccessibility <- function(geneList, peakGranges, atacData, genome) {
     binaryATAC[x,]
   })
   
-  names(geneAccessibile) <- symbols[geneInds]
+  if(!is.null(toRemove)){
+    names(geneAccessibile) <- symbols[geneInds][-toRemove]
+  }
+  else{
+    names(geneAccessibile) <- symbols[geneInds]
+  }
   
   return(geneAccessibile)
   
 }
+
