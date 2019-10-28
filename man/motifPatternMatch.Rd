@@ -7,8 +7,8 @@
 \alias{getTFDescriptions}
 \title{Find Motifs and TFs from PatternMarker Peaks}
 \usage{
-motifPatternMatch(cogapsResult, numregions, generanges, motiflist, genome,
-  motifsPerRegion = 1)
+motifPatternMatch(cogapsResult, generanges, motiflist, genome,
+  scoreThreshold = 0.03, motifsPerRegion = 1)
 
 getTFs(motifList, tfData)
 
@@ -19,15 +19,15 @@ getTFDescriptions(TFs)
 \arguments{
 \item{cogapsResult}{the result object from a CoGAPS run}
 
-\item{numregions}{the number of the most pattern-defining regions to
-investigate for each pattern}
-
 \item{generanges}{GRanges objects corresponding to the genomic regions which
 form the rows of the ATAC-seq data that CoGAPS was run on}
 
 \item{motiflist}{a PWMlist of motifs to search the regions for}
 
 \item{genome}{the ucsc genome version to use e.g. "hg19", "mm10"}
+
+\item{scoreThreshold}{threshold for the most pattern defining peaks as per
+the PatternMarker statistic from the CoGAPS package}
 
 \item{motifsPerRegion}{number of top motifs to return from each peak}
 

@@ -40,7 +40,7 @@ RNAseqTFValidation = function(TFGenes, RNACoGAPSResult, ATACPatternSet,
   for(i in ATACPatternSet){
     for(j in RNAPatternSet){
       gsea = suppressWarnings(fgsea::fgsea(TFGenes[[i]], genesRanks[,j], 50000))
-      gseaResults[[k]] = gsea
+      gseaResults[[k]] = gsea[order(gsea$pval),]
       print(head(gsea[order(gsea$pval), 1:3], n=10))
       k=k+1
     }

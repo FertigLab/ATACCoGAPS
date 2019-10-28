@@ -1,12 +1,12 @@
 Package: ATACCoGAPS
 Title: Analysis Tools for scATACseq Data with CoGAPS
-Version: 0.90.5
+Version: 0.90.7
 Authors@R: 
     person(given = "Rossin",
            family = "Erbe",
            role = c("aut", "cre"),
            email = "rerbe1@jhmi.edu")
-Description: Provides tools for running the CoGAPS algorithm (Fertig et al, 2010) on scATAC sequencing data and for analysis of the results. 
+Description: Provides tools for running the CoGAPS algorithm (Fertig et al, 2010) on single-cell ATAC sequencing data and analysis of the results. 
 License: GPL-2
 Depends:
   R (>= 3.5.0),

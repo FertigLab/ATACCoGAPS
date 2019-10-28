@@ -100,29 +100,36 @@ geneMatch = function(regionIndex, generanges, genome) {
 #' gene and the nearest gene following the region
 #'
 #' @param cogapsResult the CogapsResult object produced by a CoGAPS run
-#' @param numregions the number of the most pattern-defining regions to
-#'   investigate for each pattern
 #' @param generanges GRanges object corresponding to the genomic regions
 #'   identified as peaks for the ATAC-seq data that CoGAPS was run on
 #' @param genome Homo.sapiens or Mus.musculus currently supported
+#' @param scoreThreshold threshold for the most pattern defining peaks as per
+#'   the PatternMarker statistic from the CoGAPS package
 #' @return double nested list containing lists of the genes in, nearest, and
-#'   following the top numregions for each pattern
+#'   following the peaks matched each pattern
 #' @examples data(schepCogapsResult)
 #' data(schepGranges)
 #'
-#' genes = genePatternMatch(schepCogapsResult, 500, schepGranges, Homo.sapiens)
+#' genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens, scoreThreshold = 0.03)
 #' @export
-genePatternMatch = function(cogapsResult, numregions, generanges, genome) {
+genePatternMatch = function(cogapsResult, generanges, genome, scoreThreshold = 0.03) {
 
   #get PatternMarker peak indices
   patMarkers = CoGAPS::patternMarkers(cogapsResult)
-  patRanks = as.data.frame(patMarkers[2])
-  chr_regions = rownames(patRanks)
-  regionPatList = vector(mode=  "list", length = ncol(patRanks))
-  for(i in seq(ncol(patRanks))) {
-    topPeaksPat = order(patRanks[,i])[seq(numregions)]
+  patScores = as.data.frame(patMarkers$PatternMarkerScores)
+  chr_regions = rownames(patScores)
+  regionPatList = vector(mode=  "list", length = ncol(patScores))
+  for(i in seq(ncol(patScores))) {
+    topPeaksPat = which(patScores[,i] < scoreThreshold)
     regionPatList[[i]] = topPeaksPat
   }
+  
+  #print number of peaks used based on patternMarker score threshold
+  numPeaks = unlist(lapply(regionPatList, length))
+  names(numPeaks) = lapply(seq(length(regionPatList)),
+                           function(x) {paste("Pattern", x)})
+  print("Number of peaks used for each pattern:", quote = FALSE)
+  print(numPeaks)
 
   #run the geneMatch function for every pattern
   filenames = vector(mode = "list", length = length(regionPatList))

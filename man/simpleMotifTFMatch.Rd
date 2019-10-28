@@ -4,13 +4,11 @@
 \alias{simpleMotifTFMatch}
 \title{Motif/TF Matching in a Single Function}
 \usage{
-simpleMotifTFMatch(cogapsResult, numregions, generanges, organism, genome,
-  motifsPerRegion = 1)
+simpleMotifTFMatch(cogapsResult, generanges, organism, genome,
+  scoreThreshold = 0.03, motifsPerRegion = 1)
 }
 \arguments{
 \item{cogapsResult}{result object from CoGAPS run}
-
-\item{numregions}{number of peaks to match motifs to}
 
 \item{generanges}{GRanges object corresponding to peaks in ATACseq data
 CoGAPS was run on}
@@ -18,6 +16,9 @@ CoGAPS was run on}
 \item{organism}{organism name (e.g. "Homo sapiens")}
 
 \item{genome}{genome version to use (e.g. hg19, mm10)}
+
+\item{scoreThreshold}{threshold for the most pattern defining peaks as per
+the PatternMarker statistic from the CoGAPS package}
 
 \item{motifsPerRegion}{number of motifs to attempt to find within each peak}
 }
@@ -41,6 +42,6 @@ data.
 data(schepCogapsResult)
 data(schepGranges)
 
-motifResults = simpleMotifTFMatch(schepCogapsResult, numregions = 50,
- generanges = schepGranges, organism = "Homo sapiens", genome = "hg19")
+motifResults = simpleMotifTFMatch(schepCogapsResult,
+ generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", scoreThreshold = 0.03)
 }
