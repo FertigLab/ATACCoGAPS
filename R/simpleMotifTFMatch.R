@@ -10,11 +10,12 @@
 #' data.
 #'
 #' @param cogapsResult result object from CoGAPS run
-#' @param numregions number of peaks to match motifs to
 #' @param generanges GRanges object corresponding to peaks in ATACseq data
 #'   CoGAPS was run on
 #' @param organism organism name (e.g. "Homo sapiens")
 #' @param genome genome version to use (e.g. hg19, mm10)
+#' @param scoreThreshold threshold for the most pattern defining peaks as per
+#'   the PatternMarker statistic from the CoGAPS package
 #' @param motifsPerRegion number of motifs to attempt to find within each peak
 #' @return list containing list of matched motifs, list of transciption factors,
 #'   regulatory gene networks known for those TFs, functional annotations,
@@ -23,11 +24,11 @@
 #' @examples data(schepCogapsResult)
 #' data(schepGranges)
 #'
-#' motifResults = simpleMotifTFMatch(schepCogapsResult, numregions = 50,
-#'  generanges = schepGranges, organism = "Homo sapiens", genome = "hg19")
+#' motifResults = simpleMotifTFMatch(schepCogapsResult,
+#'  generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", scoreThreshold = 0.03)
 #' @export
-simpleMotifTFMatch = function(cogapsResult, numregions, generanges, organism,
-                            genome, motifsPerRegion = 1) {
+simpleMotifTFMatch = function(cogapsResult, generanges, organism,
+                            genome, scoreThreshold = 0.03, motifsPerRegion = 1) {
 
   if(organism == "Homo sapiens") {
     networks = humanRegNets
@@ -39,8 +40,8 @@ simpleMotifTFMatch = function(cogapsResult, numregions, generanges, organism,
 
   jMotifs = chromVAR::getJasparMotifs(organism)
   #call motifPatternMatch
-  patternJMotifs = motifPatternMatch(cogapsResult, numregions, generanges, jMotifs,
-                                     genome, motifsPerRegion)
+  patternJMotifs = motifPatternMatch(cogapsResult, generanges, jMotifs,
+                                     genome, scoreThreshold, motifsPerRegion)
   #make lists of all relevant info to return
   tfNameList = vector("list", length(patternJMotifs))
   motifNameList = vector("list", length(patternJMotifs))

@@ -19,7 +19,7 @@ the PatternMarker statistic from the CoGAPS package}
 }
 \value{
 double nested list containing lists of the genes in, nearest, and
-  following the top numregions for each pattern
+  following the peaks matched each pattern
 }
 \description{
 Function to take as input CoGAPS results for ATAC-seq data and find genes
@@ -31,5 +31,5 @@ gene and the nearest gene following the region
 data(schepCogapsResult)
 data(schepGranges)
 
-genes = genePatternMatch(schepCogapsResult, 500, schepGranges, Homo.sapiens)
+genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens, scoreThreshold = 0.03)
 }

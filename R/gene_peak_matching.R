@@ -106,11 +106,11 @@ geneMatch = function(regionIndex, generanges, genome) {
 #' @param scoreThreshold threshold for the most pattern defining peaks as per
 #'   the PatternMarker statistic from the CoGAPS package
 #' @return double nested list containing lists of the genes in, nearest, and
-#'   following the top numregions for each pattern
+#'   following the peaks matched each pattern
 #' @examples data(schepCogapsResult)
 #' data(schepGranges)
 #'
-#' genes = genePatternMatch(schepCogapsResult, 500, schepGranges, Homo.sapiens)
+#' genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens, scoreThreshold = 0.03)
 #' @export
 genePatternMatch = function(cogapsResult, generanges, genome, scoreThreshold = 0.03) {
 
