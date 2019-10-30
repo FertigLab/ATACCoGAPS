@@ -29,7 +29,7 @@ peaksToGRanges = function(region_list, sep) {
 
   #build GRanges by creating dataframe to supply to the makeGRangesFromDataFrame function
   df = data.frame(chrs, starts, ends)
-  granges = GenomicRanges::makeGRangesFromDataFrame(df, seqnames.field = "chrs",
+  granges = GenomicRanges::makeGRangesFromDataFrame(df, ignore.strand = TRUE, seqnames.field = "chrs",
                                                     start.field = "starts",
                                                     end.field = "ends")
 

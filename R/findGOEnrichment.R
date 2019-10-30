@@ -9,7 +9,7 @@
 #' @param genome UCSC genome designation for input to the sumbitGreatJob
 #'   function from the rGREAT package (e.g. "hg19")
 #' @param scoreThreshold threshold of PatternMarker score to take peaks for
-#'   analysis, higher values return more peaks, default is 0.03
+#'   analysis, higher values return more peaks, default is 0.05
 #' @return list containing GO enrichment result for each pattern
 #' @examples data(schepCogapsResult)
 #' data(schepGranges)

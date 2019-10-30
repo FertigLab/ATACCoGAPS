@@ -5,7 +5,7 @@
 \title{Motif/TF Matching in a Single Function}
 \usage{
 simpleMotifTFMatch(cogapsResult, generanges, organism, genome,
-  scoreThreshold = 0.03, motifsPerRegion = 1)
+  scoreThreshold = 0.05, motifsPerRegion = 1)
 }
 \arguments{
 \item{cogapsResult}{result object from CoGAPS run}

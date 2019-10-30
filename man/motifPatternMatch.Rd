@@ -8,7 +8,7 @@
 \title{Find Motifs and TFs from PatternMarker Peaks}
 \usage{
 motifPatternMatch(cogapsResult, generanges, motiflist, genome,
-  scoreThreshold = 0.03, motifsPerRegion = 1)
+  scoreThreshold = 0.05, motifsPerRegion = 1)
 
 getTFs(motifList, tfData)
 
