@@ -112,7 +112,7 @@ geneMatch = function(regionIndex, generanges, genome) {
 #'
 #' genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens, scoreThreshold = 0.03)
 #' @export
-genePatternMatch = function(cogapsResult, generanges, genome, scoreThreshold = 0.03) {
+genePatternMatch = function(cogapsResult, generanges, genome, scoreThreshold = 0.05) {
 
   #get PatternMarker peak indices
   patMarkers = CoGAPS::patternMarkers(cogapsResult)

@@ -28,7 +28,7 @@
 #'  generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", scoreThreshold = 0.03)
 #' @export
 simpleMotifTFMatch = function(cogapsResult, generanges, organism,
-                            genome, scoreThreshold = 0.03, motifsPerRegion = 1) {
+                            genome, scoreThreshold = 0.05, motifsPerRegion = 1) {
 
   if(organism == "Homo sapiens") {
     networks = humanRegNets

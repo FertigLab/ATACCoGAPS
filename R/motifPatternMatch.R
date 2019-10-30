@@ -47,7 +47,7 @@ patternAccessibleMotifs = function(pattern, generanges, motifs, genome,
 #'   number of regions for each pattern
 #' @export
 motifPatternMatch = function(cogapsResult, generanges, motiflist,
-                             genome, scoreThreshold = 0.03, motifsPerRegion = 1) {
+                             genome, scoreThreshold = 0.05, motifsPerRegion = 1) {
 
   #get PatternMarker peak indices
   patMarkers = CoGAPS::patternMarkers(cogapsResult)
