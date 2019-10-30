@@ -16,7 +16,7 @@ data CoGAPS was applied to}
 function from the rGREAT package (e.g. "hg19")}
 
 \item{scoreThreshold}{threshold of PatternMarker score to take peaks for
-analysis, higher values return more peaks, default is 0.03}
+analysis, higher values return more peaks, default is 0.05}
 }
 \value{
 list containing GO enrichment result for each pattern

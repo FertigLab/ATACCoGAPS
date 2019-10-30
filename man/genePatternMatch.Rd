@@ -4,7 +4,7 @@
 \alias{genePatternMatch}
 \title{Match genes to pattern differentiating peaks}
 \usage{
-genePatternMatch(cogapsResult, generanges, genome, scoreThreshold = 0.03)
+genePatternMatch(cogapsResult, generanges, genome, scoreThreshold = 0.05)
 }
 \arguments{
 \item{cogapsResult}{the CogapsResult object produced by a CoGAPS run}
