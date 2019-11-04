@@ -7,8 +7,12 @@ editor_options:
   chunk_output_type: console
 ---
 
-ATACCoGAPS can be installed from GitHub
+ATACCoGAPS can be installed from GitHub 
 ```{r, eval = FALSE}
+#installing required Bioconductor packages
+BiocManager::install(c("CoGAPS", "GenomicRanges", "projectR", "TFBSTools", "GeneOverlap", "msigdbr", "motifmatchr", "chromVAR", "GenomicFeatures", "IRanges", "fgsea", "rGREAT", "Homo.sapiens", "Mus.musculus"))
+
+#installing ATACCoGAPS
 devtools::install_github("FertigLab/ATACCoGAPS")
 ```
 
@@ -18,7 +22,9 @@ library(ATACCoGAPS)
 ```
 
 
-To outline the ATACCoGAPS pipeline, we will use as an example data set single-cell ATAC sequencing data published by Schep et al, 2017. The data was downloaded from GEO accession number GSE99172 and preprocessed using dataSubsetBySparsity() from the ATACCoGAPS package to remove cells and peaks with more than 99% sparsity (more than 99% zeroes).
+To outline the ATACCoGAPS pipeline, we will use as an example data set single-cell ATAC sequencing data containing 10 cell lines, published by Schep et al, 2017. The data was downloaded from GEO accession number GSE99172 and preprocessed using dataSubsetBySparsity() from the ATACCoGAPS package to remove cells and peaks with more than 99% sparsity (more than 99% zeroes).
+For the code used in preprocessing this data, see: https://github.com/rossinerbe/ATACCoGAPS-Analysis-Code/blob/master/Schep_data_analysis/main_analysis_peak_summarization.Rmd
+
 ```{r}
 data("schepFilteredData")
 data("schepCelltypes")
@@ -34,11 +40,11 @@ params
 ```
 
 
-We now call CoGAPS via the R function. CoGAPS is a Bayesian Non-Negative Matrix Factorization algorithm (Fertig et al, 2010). It factorizes count matrices sequencing data and returns patterns which distinguish both features and samples, allowing for the discovery of regulatory differences between samples. In the case of scATAC our features are usually peaks and our samples are indvidual cells.
+We now call CoGAPS via the R function. CoGAPS is a Bayesian Non-Negative Matrix Factorization algorithm (Fertig et al, 2010). It factorizes count matrices from RNA or epigenetic sequencing data and returns patterns which distinguish both features and samples, allowing for the discovery of regulatory differences between samples. In the case of scATAC-seq our features are usually peaks and our samples are indvidual cells.
 
-It is generally not recommended to run CoGAPS locally as it is quite computationally intensive and usually requires at least 3-6 hours runtime for most single-cell data sets, even on powerful servers. The code below is used only as an example, and to speed up the generation of this document, will not be run here. We will instead use the example CoGAPS result included in the package which was run on the Batch servers of the AWS cloud. 
+It is generally not recommended to run CoGAPS locally as it is quite computationally intensive and usually requires at least 3-6 hours runtime for most single-cell data sets, even on powerful servers. The code below is used only as an example, and to speed up the generation of this document, will not be run here. We will instead use the example CoGAPS result included in the ATACCoGAPS package which was run on the Batch servers of the AWS cloud. 
 ```{r, eval = FALSE}
-cogapsResult <- GWCoGAPS(data = schepFilteredData, params = params, nThreads = 9)
+schepCogapsResult <- GWCoGAPS(data = schepFilteredData, params = params, nThreads = 9)
 ```
 
 Loading in the pre-computed CoGAPS result
@@ -54,7 +60,7 @@ The first quick visualization of CoGAPS results is generally plotting the Patter
 We can either plot each pattern indvidually
 ```{r}
 #colors to plot by
-col <- c('yellow', 'blue', 'lightblue', "royalblue", "green", "salmon", "red", "orange", "darkgreen", "darkred", "red3", "deeppink")
+col <- c("salmon", 'aquamarine', 'aquamarine3', "aquamarine4", "darkorchid1", 'limegreen', "magenta", "orangered", "darkgreen", "darkred", "red3", "darkorange")
 
 
 cgapsPlot(cgaps_result = schepCogapsResult, sample.classifier = schepCelltypes, cols = col, ylab = "Pattern Weight")
@@ -75,6 +81,14 @@ pairwise.wilcox.test(patMatrix[,7], schepCelltypes, p.adjust.method = "BH")
 We see that pattern 7 is most strongly associated with the monocytes in the data.
 
 
+If we do not have pre-established cell annotations, we can cluster cells by pattern association.
+```{r}
+cellClass <- patternMarkerCellClassifier(schepCogapsResult)
+cellClasses <- cellClass$cellClassifier
+
+heatmapPatternMatrix(schepCogapsResult, as.factor(cellClasses))
+```
+
 
 # Finding Regulatory Differences between Cell Types
 
@@ -90,15 +104,15 @@ The differentially accessible peaks we find distinguish the cell types we see in
 
 ## Pathway Based Analysis
 
-To make use of this differential accessibility data, one option is to try to find genes that fall within these peaks and determine whether the accessibility of certain groups of genes suggests differential pathway activation.
+To make use of this differential accessibility data, one option is to try to find genes that fall within these peaks and determine whether the accessibility of certain groups of genes suggests differential pathway activation. We choose peaks based on a threshold for the PatternMarker score of the peaks. Results are quite robust to changing the scoreThreshold, though we recommend generally using thresholds that return at least 100 peaks per pattern.
 ```{r, message = FALSE}
 data("schepGranges")
 
 #loading TxDb of human genes
 library(Homo.sapiens)
 
-#find genes known to fall witin the top 500 patternMarker peaks for each pattern
-genes <- genePatternMatch(cogapsResult = schepCogapsResult, numregions = 500, generanges = schepGranges, genome = Homo.sapiens)
+#find genes known to fall within thresholded patternMarker peaks for each pattern
+genes <- genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens, scoreThreshold = 0.05)
 
 #download hallmark pathways using msigdbr
 library(dplyr)
@@ -111,7 +125,7 @@ pathways <- msigdbr::msigdbr(species = "Homo sapiens", category =
 #match these pattern Gene sets to hallmark pathways, using an adjusted p-value threshold of 0.001.
 matchedPathways <- pathwayMatch(gene_list = genes, pathways = pathways, p_threshold = 0.001)
 
-matchedPathways
+lapply(matchedPathways, function(x) {x[c(1,3)]})
 ```
 
 Several patterns do not return Hallmark pathways at this level of significance, but those that do seem logical in the cell types those patterns differentiate. 
@@ -119,33 +133,58 @@ Several patterns do not return Hallmark pathways at this level of significance, 
 Of particular note, we find the Epithelial Mesenchymal Transition pathway to be strongly associated with Fibroblasts, which is known to be the classical wound healing pathway in Fibroblasts. Additionally, monocytes are most strongly associated with the Hallmark Inflammatory Response, as we would expect for inflammatory cells.
 
 
+We can alternatively perform enrichment for GO terms using the rGREAT package, which we employ via a wrapper function.
+```{r}
+GOterms <- findGOEnrichment(schepCogapsResult, schepGranges, "hg19", scoreThreshold = 0.05)
+
+#top Embryonic Stem Cell pattern GO terms
+GOterms[[5]][1:5,]
+```
+
+
+
 ## Motif/Transcription Factor Based Analysis
 
 The other way we can use differential peak information is to match to DNA motifs and known Transcription Factor binding at those motifs.
 ```{r}
-motifResults = simpleMotifTFMatch(cogapsResult = schepCogapsResult, numregions = 50, generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", motifsPerRegion = 1)
+motifResults = simpleMotifTFMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", scoreThreshold = 0.05, motifsPerRegion = 1)
 
 ```
 
-We can get a summary of TF binding, generally having more confidence in those that have multiple motifs at which the same TF could bind.
+We can get a summary of TF binding, generally having more confidence in those TFs that have higher numbers of motifs at which the same TF could bind.
 ```{r}
-motifResults$tfMatchSummary
+#showing motif results for monocytes
+motifResults$tfMatchSummary[[7]]
 ```
 
-The entrez gene summary is returned for all TFs found in matching, allowing us to easily check whether a TF seems like a plausible regulatory factor in a given cell type. For example, if we want to take a look at the function of EGR1 given the prevalence of potential binding sites for it found in pattern1:
+The entrez gene summary is returned for all TFs found in matching, allowing us to easily check whether a TF seems like a plausible regulatory factor in a given cell type. For example, if we want to take a look at the function of IRF1, given that it has the most available binding sites in the monocyte associated pattern we can call
 ```{r}
-motifResults$tfDescriptions[[1]][which(motifResults$tfDescriptions[[1]][,2]=="EGR1"), 1]
+motifResults$tfDescriptions[[7]][which(motifResults$tfDescriptions[[7]][,2]=="IRF1"), 1]
 ```
-This description gives us a sense that this TF may play some role in the oncogenesis of this cancer cell line, potentially a modulating one.
+This description indicates the immune relevance of IRF1, and that it may have activity in monocytes. 
+
+
+We can also examine the accessibility of the TF itself in a cell type of interest in order to gather information on whether the TF is expressed to bind at accessible sites. We'll test the accessibility of IRF1 in monocytes as an example.
+```{r}
+#get peaks overlapping with the gene
+IRF1peaks <- geneAccessibility("IRF1", schepGranges, schepFilteredData, Homo.sapiens)
+
+#make binary accessibility matrix
+binaryMatrix <- (schepFilteredData > 0) + 0
+
+#find accessibility of those peaks relative to others among monocyte cells
+foldAccessibility(peaksAccessibility = IRF1peaks$IRF1, cellTypeList = schepCelltypes, cellType = "Monocyte", binaryMatrix = binaryMatrix)
+```
+IRF1 is 2.3 times more accessible than average in Monocytes, indicating it is likely active in these cells
 
 
 # Transfer Learning with ProjectR
 
-To determine if the patterns we have identified with CoGAPS appear in other data sets we can apply transfer learning between ATAC datasets using projectR (Stein-O'Brein and Sharma, 2019). projectR allows us to project patterns learned on one data set into another.
+To determine if the patterns we have identified with CoGAPS appear in other data sets we can apply transfer learning between ATAC datasets using projectR (Stein-O'Brein et al, 2017). projectR allows us to project patterns learned on one data set into another.
 
 This can be useful for validating the generality and biological relevance of patterns, determining if learned signatures appear in other datasets without needing to run CoGAPS again, or simply to learn more regulatory information by combining patterns learned on different data sets.
 
-To demonstrate we will use a set of scATAC data published by Buenrostro et al, 2018 containing a number of hematopoietic lineage cells.
+To demonstrate, we will project from the Schep data into a set of scATAC data published by Buenrostro et al, 2018, containing a number of hematopoietic lineage cells.
 ```{r, message = FALSE}
 #getting count matrix - peaks x cells
 repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroFinalSubsetData.Rdata?raw=true")
@@ -177,7 +216,12 @@ In pattern 7 (monocyte) we see strongest signal in the moncytes in the target da
 pairwise.wilcox.test(projectRResults$projection[7,], BuenrostroCellTypes, p.adjust.method = "BH")
 ```
 
-And we observe that monocytes  in the target dataset are most siginificantly associated with the monocyte pattern.
+and make a boxplot of the pattern weight of each cell type
+```{r}
+boxplot(projectRResults$projection[7,] ~ as.factor(BuenrostroCellTypes), xlab = "Cell Type", ylab = "Pattern Weight")
+```
+
+And we observe that the monocytes in the target dataset are most siginificantly associated with the monocyte pattern.
 
 # Session Info
 
