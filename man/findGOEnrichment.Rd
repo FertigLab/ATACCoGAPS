@@ -4,7 +4,7 @@
 \alias{findGOEnrichment}
 \title{Find Enrichment of GO Terms in PatternMarker Peaks}
 \usage{
-findGOEnrichment(cogapsResult, granges, genome, scoreThreshold = 0.05)
+findGOEnrichment(cogapsResult, granges, genome, scoreThreshold = NULL)
 }
 \arguments{
 \item{cogapsResult}{result object from CoGAPS}
@@ -16,7 +16,9 @@ data CoGAPS was applied to}
 function from the rGREAT package (e.g. "hg19")}
 
 \item{scoreThreshold}{threshold of PatternMarker score to take peaks for
-analysis, higher values return more peaks, default is 0.05}
+analysis, higher values return more peaks. Default is NULL, returning all
+PatternMarker peaks. Useful to reduce computational time, as top results
+are reasonably robust to using more stringent thresholds}
 }
 \value{
 list containing GO enrichment result for each pattern

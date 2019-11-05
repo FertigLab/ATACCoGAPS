@@ -4,7 +4,7 @@
 \alias{genePatternMatch}
 \title{Match genes to pattern differentiating peaks}
 \usage{
-genePatternMatch(cogapsResult, generanges, genome, scoreThreshold = 0.05)
+genePatternMatch(cogapsResult, generanges, genome, scoreThreshold = NULL)
 }
 \arguments{
 \item{cogapsResult}{the CogapsResult object produced by a CoGAPS run}
@@ -15,7 +15,9 @@ identified as peaks for the ATAC-seq data that CoGAPS was run on}
 \item{genome}{Homo.sapiens or Mus.musculus currently supported}
 
 \item{scoreThreshold}{threshold for the most pattern defining peaks as per
-the PatternMarker statistic from the CoGAPS package}
+the PatternMarker statistic from the CoGAPS package. Default is NULL,
+returning all PatternMarker peaks. Useful to reduce computational time, as
+top results are reasonably robust to using more stringent thresholds}
 }
 \value{
 double nested list containing lists of the genes in, nearest, and
@@ -31,5 +33,5 @@ gene and the nearest gene following the region
 data(schepCogapsResult)
 data(schepGranges)
 
-genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens, scoreThreshold = 0.03)
+genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens)
 }

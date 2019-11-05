@@ -8,7 +8,7 @@
 \title{Find Motifs and TFs from PatternMarker Peaks}
 \usage{
 motifPatternMatch(cogapsResult, generanges, motiflist, genome,
-  scoreThreshold = 0.05, motifsPerRegion = 1)
+  scoreThreshold = NULL, motifsPerRegion = 1)
 
 getTFs(motifList, tfData)
 
@@ -27,7 +27,9 @@ form the rows of the ATAC-seq data that CoGAPS was run on}
 \item{genome}{the ucsc genome version to use e.g. "hg19", "mm10"}
 
 \item{scoreThreshold}{threshold for the most pattern defining peaks as per
-the PatternMarker statistic from the CoGAPS package}
+the PatternMarker statistic from the CoGAPS package. By default is NULL, in
+which case all Pattern defining peaks will be used for motif matching. Used
+to reduce compute time, as results are quite robust across thresholds}
 
 \item{motifsPerRegion}{number of top motifs to return from each peak}
 

@@ -15,7 +15,9 @@
 #' @param organism organism name (e.g. "Homo sapiens")
 #' @param genome genome version to use (e.g. hg19, mm10)
 #' @param scoreThreshold threshold for the most pattern defining peaks as per
-#'   the PatternMarker statistic from the CoGAPS package
+#'   the PatternMarker statistic from the CoGAPS package. By default is NULL, in
+#'   which case all Pattern defining peaks will be used for motif matching. Used
+#'   to reduce compute time, as results are quite robust across thresholds
 #' @param motifsPerRegion number of motifs to attempt to find within each peak
 #' @return list containing list of matched motifs, list of transciption factors,
 #'   regulatory gene networks known for those TFs, functional annotations,
@@ -25,10 +27,10 @@
 #' data(schepGranges)
 #'
 #' motifResults = simpleMotifTFMatch(schepCogapsResult,
-#'  generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", scoreThreshold = 0.03)
+#'  generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", scoreThreshold = 0.05)
 #' @export
 simpleMotifTFMatch = function(cogapsResult, generanges, organism,
-                            genome, scoreThreshold = 0.05, motifsPerRegion = 1) {
+                            genome, scoreThreshold = NULL, motifsPerRegion = 1) {
 
   if(organism == "Homo sapiens") {
     networks = humanRegNets
