@@ -8,12 +8,6 @@ Install the most recent version of CoGAPS in R with:
 devtools::install_github("FertigLab/CoGAPS")
 ```
 
-or from Bioconductor with:
-
-```
-BiocManager::install("CoGAPS")
-```
-
 Install other needed Bioconductor packages for ATACCoGAPS using:
 
 ```
