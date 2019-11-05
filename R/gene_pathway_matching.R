@@ -16,11 +16,14 @@ paths = function(patGenes, pathways, pval_cut, pAdjustMethod) {
   pvals = p.adjust(pvals, pAdjustMethod)
   inds = which(pvals < pval_cut)
   gene_ov_objs = testList[inds]
-  sigpvals = unlist(lapply(gene_ov_objs, GeneOverlap::getPval))
   paths = pathways[inds]
   nms = names(paths)
+  if(length(gene_ov_objs) > 0) {
+  sigpvals = unlist(lapply(gene_ov_objs, GeneOverlap::getPval))
   df = data.frame(pathway = nms, PValue = sigpvals)
   df = df[order(df$PValue),]
+  }
+  else{df = NULL}
   return(list(gene_overlaps = gene_ov_objs, matched_pathways = paths,
               pathway_names = nms, summaryTable = df))
 }
