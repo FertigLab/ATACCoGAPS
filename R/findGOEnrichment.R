@@ -9,14 +9,15 @@
 #' @param genome UCSC genome designation for input to the sumbitGreatJob
 #'   function from the rGREAT package (e.g. "hg19")
 #' @param scoreThreshold threshold of PatternMarker score to take peaks for
-#'   analysis, higher values return more peaks. Default is NULL, returning all
-#'   PatternMarker peaks. Useful to reduce computational time, as top results
-#'   are reasonably robust to using more stringent thresholds
+#'   analysis, higher values return more peaks. Default is NULL, but rGREAT has
+#'   better performance on lower numbers of peaks/genes, so more stringent
+#'   thresholding will often improve results. Reasonable values generally range
+#'   from 0.05 to 0.25
 #' @return list containing GO enrichment result for each pattern
 #' @examples data(schepCogapsResult)
 #' data(schepGranges)
 #'
-#' GOenrichment <- findGOEnrichment(cogapsResult = schepCogapsResult, granges = schepGranges, genome = "hg19")
+#' GOenrichment <- findGOEnrichment(cogapsResult = schepCogapsResult, granges = schepGranges, genome = "hg19", scoreThreshold = 0.05)
 #' @export
 
 findGOEnrichment <- function(cogapsResult, granges, genome, scoreThreshold = NULL) {
