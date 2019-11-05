@@ -9,7 +9,9 @@
 #' @param genome UCSC genome designation for input to the sumbitGreatJob
 #'   function from the rGREAT package (e.g. "hg19")
 #' @param scoreThreshold threshold of PatternMarker score to take peaks for
-#'   analysis, higher values return more peaks, default is 0.05
+#'   analysis, higher values return more peaks. Default is NULL, returning all
+#'   PatternMarker peaks. Useful to reduce computational time, as top results
+#'   are reasonably robust to using more stringent thresholds
 #' @return list containing GO enrichment result for each pattern
 #' @examples data(schepCogapsResult)
 #' data(schepGranges)
@@ -17,16 +19,28 @@
 #' GOenrichment <- findGOEnrichment(cogapsResult = schepCogapsResult, granges = schepGranges, genome = "hg19")
 #' @export
 
-findGOEnrichment <- function(cogapsResult, granges, genome, scoreThreshold = 0.05) {
+findGOEnrichment <- function(cogapsResult, granges, genome, scoreThreshold = NULL) {
   
   #get PatternMarker regions
   patMarkers = CoGAPS::patternMarkers(cogapsResult)
-  patScores = as.data.frame(patMarkers$PatternMarkerScores)
-  chr_regions = rownames(patScores)
-  regionPatList = vector("list", length = ncol(patScores))
-  for(i in seq(ncol(patScores))) {
-    topPeaksPat = which(patScores[,i] < scoreThreshold)
-    regionPatList[[i]] = topPeaksPat
+  if(is.null(scoreThreshold)){
+    peaks = patMarkers$PatternMarkers
+    nPeaks = lapply(peaks, length)
+    PMRanks = patMarkers$PatternMarkerRanks
+    regionPatList = vector(mode = "list", length = ncol(PMRanks))
+    for(i in seq(ncol(PMRanks))) {
+      topPeaksPat = which(PMRanks[,i] %in% seq(nPeaks[[i]]))
+      regionPatList[[i]] = topPeaksPat
+    }
+  }
+  else{
+    patScores = as.data.frame(patMarkers$PatternMarkerScores)
+    chr_regions = rownames(patScores)
+    regionPatList = vector("list", length = ncol(patScores))
+    for(i in seq(ncol(patScores))) {
+      topPeaksPat = which(patScores[,i] < scoreThreshold)
+      regionPatList[[i]] = topPeaksPat
+    }
   }
   
   #print number of peaks used based on patternMarker score threshold

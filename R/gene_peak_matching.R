@@ -104,24 +104,38 @@ geneMatch = function(regionIndex, generanges, genome) {
 #'   identified as peaks for the ATAC-seq data that CoGAPS was run on
 #' @param genome Homo.sapiens or Mus.musculus currently supported
 #' @param scoreThreshold threshold for the most pattern defining peaks as per
-#'   the PatternMarker statistic from the CoGAPS package
+#'   the PatternMarker statistic from the CoGAPS package. Default is NULL,
+#'   returning all PatternMarker peaks. Useful to reduce computational time, as
+#'   top results are reasonably robust to using more stringent thresholds
 #' @return double nested list containing lists of the genes in, nearest, and
 #'   following the peaks matched each pattern
 #' @examples data(schepCogapsResult)
 #' data(schepGranges)
 #'
-#' genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens, scoreThreshold = 0.03)
+#' genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens)
 #' @export
-genePatternMatch = function(cogapsResult, generanges, genome, scoreThreshold = 0.05) {
+genePatternMatch = function(cogapsResult, generanges, genome, scoreThreshold = NULL) {
 
   #get PatternMarker peak indices
   patMarkers = CoGAPS::patternMarkers(cogapsResult)
-  patScores = as.data.frame(patMarkers$PatternMarkerScores)
-  chr_regions = rownames(patScores)
-  regionPatList = vector(mode=  "list", length = ncol(patScores))
-  for(i in seq(ncol(patScores))) {
-    topPeaksPat = which(patScores[,i] < scoreThreshold)
-    regionPatList[[i]] = topPeaksPat
+  if(is.null(scoreThreshold)){
+    peaks = patMarkers$PatternMarkers
+    nPeaks = lapply(peaks, length)
+    PMRanks = patMarkers$PatternMarkerRanks
+    regionPatList = vector(mode = "list", length = ncol(PMRanks))
+    for(i in seq(ncol(PMRanks))) {
+      topPeaksPat = which(PMRanks[,i] %in% seq(nPeaks[[i]]))
+      regionPatList[[i]] = topPeaksPat
+    }
+  }
+  else{
+    patScores = as.data.frame(patMarkers$PatternMarkerScores)
+    chr_regions = rownames(patScores)
+    regionPatList = vector(mode=  "list", length = ncol(patScores))
+    for(i in seq(ncol(patScores))) {
+      topPeaksPat = which(patScores[,i] < scoreThreshold)
+      regionPatList[[i]] = topPeaksPat
+    }
   }
   
   #print number of peaks used based on patternMarker score threshold

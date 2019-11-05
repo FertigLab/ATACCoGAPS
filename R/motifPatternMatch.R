@@ -41,22 +41,36 @@ patternAccessibleMotifs = function(pattern, generanges, motifs, genome,
 #' @param motiflist a PWMlist of motifs to search the regions for
 #' @param genome the ucsc genome version to use e.g. "hg19", "mm10"
 #' @param scoreThreshold threshold for the most pattern defining peaks as per
-#'   the PatternMarker statistic from the CoGAPS package
+#'   the PatternMarker statistic from the CoGAPS package. By default is NULL, in
+#'   which case all Pattern defining peaks will be used for motif matching. Used
+#'   to reduce compute time, as results are quite robust across thresholds
 #' @param motifsPerRegion number of top motifs to return from each peak
 #' @return motifPatternMatch: nested list of the top motif for each region for x
 #'   number of regions for each pattern
 #' @export
 motifPatternMatch = function(cogapsResult, generanges, motiflist,
-                             genome, scoreThreshold = 0.05, motifsPerRegion = 1) {
+                             genome, scoreThreshold = NULL, motifsPerRegion = 1) {
 
   #get PatternMarker peak indices
   patMarkers = CoGAPS::patternMarkers(cogapsResult)
-  patScores = as.data.frame(patMarkers$PatternMarkerScores)
-  chr_regions = rownames(patScores)
-  regionPatList = vector(mode=  "list", length = ncol(patScores))
-  for(i in seq(ncol(patScores))) {
-    topPeaksPat = which(patScores[,i] < scoreThreshold)
-    regionPatList[[i]] = topPeaksPat
+  
+  if(is.null(scoreThreshold)){
+    peaks = patMarkers$PatternMarkers
+    nPeaks = lapply(peaks, length)
+    PMRanks = patMarkers$PatternMarkerRanks
+    regionPatList = vector(mode = "list", length = ncol(PMRanks))
+    for(i in seq(ncol(PMRanks))) {
+      topPeaksPat = which(PMRanks[,i] %in% seq(nPeaks[[i]]))
+      regionPatList[[i]] = topPeaksPat
+    }
+  }
+  else{
+    patScores = as.data.frame(patMarkers$PatternMarkerScores)
+    regionPatList = vector(mode = "list", length = ncol(patScores))
+    for(i in seq(ncol(patScores))) {
+      topPeaksPat = which(patScores[,i] < scoreThreshold)
+      regionPatList[[i]] = topPeaksPat
+    }
   }
   
   #print number of peaks used based on patternMarker score threshold

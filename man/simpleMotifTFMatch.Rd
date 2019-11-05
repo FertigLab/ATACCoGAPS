@@ -5,7 +5,7 @@
 \title{Motif/TF Matching in a Single Function}
 \usage{
 simpleMotifTFMatch(cogapsResult, generanges, organism, genome,
-  scoreThreshold = 0.05, motifsPerRegion = 1)
+  scoreThreshold = NULL, motifsPerRegion = 1)
 }
 \arguments{
 \item{cogapsResult}{result object from CoGAPS run}
@@ -18,7 +18,9 @@ CoGAPS was run on}
 \item{genome}{genome version to use (e.g. hg19, mm10)}
 
 \item{scoreThreshold}{threshold for the most pattern defining peaks as per
-the PatternMarker statistic from the CoGAPS package}
+the PatternMarker statistic from the CoGAPS package. By default is NULL, in
+which case all Pattern defining peaks will be used for motif matching. Used
+to reduce compute time, as results are quite robust across thresholds}
 
 \item{motifsPerRegion}{number of motifs to attempt to find within each peak}
 }
@@ -43,5 +45,5 @@ data(schepCogapsResult)
 data(schepGranges)
 
 motifResults = simpleMotifTFMatch(schepCogapsResult,
- generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", scoreThreshold = 0.03)
+ generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", scoreThreshold = 0.05)
 }

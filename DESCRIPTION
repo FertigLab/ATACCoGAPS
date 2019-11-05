@@ -1,6 +1,6 @@
 Package: ATACCoGAPS
 Title: Analysis Tools for scATACseq Data with CoGAPS
-Version: 0.90.8
+Version: 0.90.9
 Authors@R: 
     person(given = "Rossin",
            family = "Erbe",
@@ -10,7 +10,7 @@ Description: Provides tools for running the CoGAPS algorithm (Fertig et al, 2010
 License: GPL-2
 Depends:
   R (>= 3.5.0),
-  CoGAPS
+  CoGAPS (>= 3.5.13)
 Imports:
     gtools,
     GenomicRanges,
