@@ -62,19 +62,19 @@ heatmapGeneAccessibility <- function(genePeaks, celltypes, colColors = NULL, ord
   }
   
   if(is.null(nrow(genePeaks))) {
-    warning("There is only one peak returned, using base plot function to visualize.")
-    plot(genePeaks, col = colColors)
+    warning("There is only one peak matched to this gene, adding a row of zeroes so the peak can be plotted using a heatmap.")
+    zeroRow <- rep(0, length(genePeaks))
+    genePeaks = rbind(genePeaks, zeroRow)
+  }
+  
+  if(order == TRUE) {
+    gplots::heatmap.2(genePeaks, density.info="none", trace="none",
+                      dendrogram='none', Rowv=FALSE, Colv=FALSE, ColSideColors = colColors,
+                      labRow = NA, labCol = as.character(sort(celltypes)), ...)
   }
   else {
-    if(order == TRUE) {
-      gplots::heatmap.2(genePeaks, density.info="none", trace="none",
-                        dendrogram='none', Rowv=FALSE, Colv=FALSE, ColSideColors = colColors,
-                        labRow = NA, labCol = as.character(sort(celltypes)), ...)
-    }
-    else {
-      gplots::heatmap.2(genePeaks, density.info="none", trace="none",
-                        dendrogram='none', Rowv=FALSE, Colv=FALSE, ColSideColors = colColors,
-                        labRow = NA, labCol = as.character(celltypes), ...)
-    }
+    gplots::heatmap.2(genePeaks, density.info="none", trace="none",
+                      dendrogram='none', Rowv=FALSE, Colv=FALSE, ColSideColors = colColors,
+                      labRow = NA, labCol = as.character(celltypes), ...)
   }
 }
