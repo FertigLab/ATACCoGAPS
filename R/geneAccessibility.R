@@ -18,7 +18,7 @@
 #' accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = schepFilteredData, genome = Homo.sapiens)
 #' @export
 geneAccessibility <- function(geneList, peakGranges, atacData, genome) {
-  genes <- geneRanges(genome)
+  genes <- geneRanges(genome) #uses geneRanges function from genePeakMatching.R file
   symbols <- mcols(genes)[["SYMBOL"]]
   geneInds <- which(symbols %in% geneList)
   
@@ -35,7 +35,7 @@ geneAccessibility <- function(geneList, peakGranges, atacData, genome) {
     olapInds <- subjectHits(olap)
     if(length(olapInds) == 0) {
       print(paste("No overlapping peaks with", mcols(listedGenes)[["SYMBOL"]][i]))
-      toRemove <- i
+      toRemove <- c(toRemove, i)
     }
     else{
       olaps[[i]] <- olapInds
