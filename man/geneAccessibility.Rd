@@ -2,12 +2,14 @@
 % Please edit documentation in R/geneAccessibility.R
 \name{geneAccessibility}
 \alias{geneAccessibility}
-\title{Find the accessibility of the peaks overlapping a set of genes}
+\title{Find the accessibility of the peaks overlapping a set of genes and their
+promoters}
 \usage{
 geneAccessibility(geneList, peakGranges, atacData, genome)
 }
 \arguments{
-\item{geneList}{vector of HGNC gene symbols to find overlapping peaks for in the data}
+\item{geneList}{vector of HGNC gene symbols to find overlapping peaks for in
+the data}
 
 \item{peakGranges}{a GRanges object corresponding to the peaks in the
 atacData matrix, in the same order as the rows of the atacData matrix}
@@ -22,8 +24,8 @@ List of matrices corresponding to the accessible peaks overlapping
 }
 \description{
 The accessibility of a particular set of interest genes is checked by testing
-overlap of peaks with the genes and then returning the binarized accesibility
-data for those peaks
+overlap of peaks with the genes and gene promoters and then returning the
+binarized accesibility data for those peaks
 }
 \examples{
 library(Homo.sapiens)
