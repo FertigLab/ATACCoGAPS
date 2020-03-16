@@ -2,6 +2,7 @@
 
 export(ATACTransferLearning)
 export(RNAseqTFValidation)
+export(applyGREAT)
 export(cgapsPlot)
 export(dataSubsetBySparsity)
 export(findRegulatoryNetworks)
