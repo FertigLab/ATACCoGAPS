@@ -61,7 +61,7 @@ pathwayMatch = function(gene_list, pathways, p_threshold = 0.05,
   
   #get pathway names
   pathways[,1] = as.factor(pathways[,1])
-  pathwayNames = names(summary(pathways[,1]))
+  pathwayNames = levels(pathways[,1])
   
   #convert downloaded data frame to list for use with GeneOverlap package
   pathgene_list = vector(mode = "list", length = length(pathwayNames))
