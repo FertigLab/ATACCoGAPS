@@ -181,13 +181,13 @@ This can be useful for validating the generality and biological relevance of pat
 To demonstrate, we will project from the Schep data into a set of scATAC data published by Buenrostro et al, 2018, containing a number of hematopoietic lineage cells.
 ```{r, message = FALSE}
 #getting count matrix - peaks x cells
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroFinalSubsetData.Rdata?raw=true")
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/updateBranch/BuenrostroFinalSubsetData.Rdata?raw=true")
 
 #getting GRanges for peaks
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroGRanges.Rdata?raw=true")
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/updateBranch/BuenrostroGRanges.Rdata?raw=true")
 
 #getting celltypes
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroCellTypes.Rdata?raw=true")
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/updateBranch/BuenrostroCellTypes.Rdata?raw=true")
 ```
 
 
