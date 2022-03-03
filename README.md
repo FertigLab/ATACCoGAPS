@@ -1,6 +1,6 @@
 # ATACCoGAPS
 
-Package which provides tools for processing and analysis of single-cell ATAC-seq data with the Bayesian Non-Negative Matrix Factorization algorithm, CoGAPS.
+Package which provides tools for processing and analysis of single-cell ATAC-seq data with the Bayesian Non-Negative Matrix Factorization algorithm, CoGAPS, as described in our Nucleic Acids Research paper https://doi.org/10.1093/nar/gkaa349.
 
 Install needed Bioconductor packages for ATACCoGAPS using:
 
