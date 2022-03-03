@@ -11,6 +11,8 @@ devtools::install_github("FertigLab/CoGAPS")
 Install other needed Bioconductor packages for ATACCoGAPS using:
 
 ```
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
 BiocManager::install(c("GenomicRanges", "projectR", "TFBSTools", "GeneOverlap", "msigdbr", "motifmatchr", "chromVAR", "GenomicFeatures", "IRanges", "fgsea", "rGREAT", "Homo.sapiens", "Mus.musculus", "JASPAR2016"))
 ```
 
