@@ -2,18 +2,12 @@
 
 Package which provides tools for processing and analysis of single-cell ATAC-seq data with the Bayesian Non-Negative Matrix Factorization algorithm, CoGAPS.
 
-Install the most recent version of CoGAPS in R with:
-
-```
-devtools::install_github("FertigLab/CoGAPS")
-```
-
-Install other needed Bioconductor packages for ATACCoGAPS using:
+Install needed Bioconductor packages for ATACCoGAPS using:
 
 ```
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
-BiocManager::install(c("GenomicRanges", "projectR", "TFBSTools", "GeneOverlap", "msigdbr", "motifmatchr", "chromVAR", "GenomicFeatures", "IRanges", "fgsea", "rGREAT", "Homo.sapiens", "Mus.musculus", "JASPAR2016"))
+BiocManager::install(c("CoGAPS", "GenomicRanges", "projectR", "TFBSTools", "GeneOverlap", "msigdbr", "motifmatchr", "chromVAR", "GenomicFeatures", "IRanges", "fgsea", "rGREAT", "Homo.sapiens", "Mus.musculus", "JASPAR2016"))
 ```
 
 Install ATACCoGAPS with:
