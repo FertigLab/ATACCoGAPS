@@ -108,14 +108,12 @@ heatmapPatternMarkers = function(cgaps_result, atac_data, celltypes, numregions 
 
   if(order == TRUE) {
     gplots::heatmap.2(allPatSubset, density.info="none", trace="none",
-                      dendrogram='none', Rowv=FALSE, Colv=FALSE,
-                      ColSideColors = colColors, RowSideColors = rowCols,
+                      dendrogram='none', Rowv=FALSE, Colv=FALSE, ColSideColors = colColors,
                       labRow = NA, labCol = as.character(sort(celltypes)), ...)
   }
   else {
     gplots::heatmap.2(allPatSubset, density.info="none", trace="none",
-                      dendrogram='none', Rowv=FALSE, Colv=FALSE,
-                      ColSideColors = colColors, RowSideColors = rowCols,
+                      dendrogram='none', Rowv=FALSE, Colv=FALSE, ColSideColors = colColors,
                       labRow = NA, labCol = as.character(celltypes), ...)
   }
 }

@@ -71,7 +71,7 @@ cgapsPlot(cgaps_result = schepCogapsResult, sample.classifier = schepCelltypes, 
 
 Or all together in a heatmap
 ```{r}
-heatmapPatternMatrix(cgaps_result = schepCogapsResult, sample.classifier = schepCelltypes, cellCols = col, col = viridis::magma(n=9))
+heatmapPatternMatrix(cgaps_result = schepCogapsResult, sample.classifier = schepCelltypes, cellCols = col)
 ```
 
 We can note which patterns differentiate which cell types (for example that pattern 1 seems to be defining the K562 Erythroleukmia Cell Line). If any patterns are unclear, such as pattern 7, we can perform a Wilcoxon Rank Sum test to determine which cell types are most significantly associated with the pattern.
@@ -89,7 +89,7 @@ If we do not have pre-established cell annotations, we can cluster cells by patt
 cellClass <- patternMarkerCellClassifier(schepCogapsResult)
 cellClasses <- cellClass$cellClassifier
 
-heatmapPatternMatrix(schepCogapsResult, as.factor(cellClasses), col = viridis::magma(n=9))
+heatmapPatternMatrix(schepCogapsResult, as.factor(cellClasses))
 ```
 
 
@@ -99,7 +99,7 @@ Now that we know which patterns distinguish which cell types, we can look at tho
 
 We can use the patternMarker Statistic (Stein-O'Brien et al, 2017) to find which peaks are most differentially accessible. To show the degree of differentiation, we can plot the 50 most pattern differentiating peaks for each pattern from the original data.
 ```{r}
-heatmapPatternMarkers(cgaps_result = schepCogapsResult, atac_data = schepFilteredData, celltypes = schepCelltypes, numregions = 50, colColors = col, col = viridis::plasma(n = 2))
+heatmapPatternMarkers(cgaps_result = schepCogapsResult, atac_data = schepFilteredData, celltypes = schepCelltypes, numregions = 50, colColors = col)
 ```
 
 The differentially accessible peaks we find distinguish the cell types we see in the pattern Matrix. In patterns 6 and 7 it seems to distinguish those cell types even better than the pattern Matrix does. This visualization allows us to see the biological differences between cell types CoGAPS is identifying.
