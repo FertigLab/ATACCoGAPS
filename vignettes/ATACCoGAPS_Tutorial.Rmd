@@ -29,7 +29,7 @@ To outline the ATACCoGAPS pipeline, we will use as an example data set single-ce
 For the code used in preprocessing this data, see: https://github.com/rossinerbe/ATACCoGAPS-Analysis-Code/blob/master/Schep_data_analysis/main_analysis_peak_summarization.Rmd
 
 ```{r}
-data("schepFilteredData")
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepFilteredData.rda?raw=true")
 data("schepCelltypes")
 data("schepFilteredPeaks")
 ```
@@ -52,7 +52,7 @@ schepCogapsResult <- GWCoGAPS(data = schepFilteredData, params = params, nThread
 
 Loading in the pre-computed CoGAPS result
 ```{r}
-data("schepCogapsResult")
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
 ```
 
 

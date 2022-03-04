@@ -29,7 +29,7 @@ accessibility (and thus implying possible transcription), with values lower
 than 1 indicating the opposite.
 }
 \examples{
-data(schepFilteredData)
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepFilteredData.rda?raw=true")
 data(schepCelltypes)
 library(Homo.sapiens)
 geneList <- c("TAL1", "IRF1")

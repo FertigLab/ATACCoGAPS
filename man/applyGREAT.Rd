@@ -36,7 +36,7 @@ Use the rGREAT package to find enrichment of GO terms or genes for the peaks fou
 be most pattern differentiating using the PatternMarker statistic.
 }
 \examples{
-data(schepCogapsResult)
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
 data(schepGranges)
 
 GOenrichment <- applyGREAT(cogapsResult = schepCogapsResult, granges = schepGranges, genome = "hg19")

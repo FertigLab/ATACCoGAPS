@@ -59,9 +59,9 @@ accessible regions as discovered by CoGAPS.
 }
 
 \examples{
-data(schepCogapsResult)
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
 data(schepCelltypes)
-data(schepFilteredData)
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepFilteredData.rda?raw=true")
 
 heatmapPatternMarkers(schepCogapsResult, atac_data = schepFilteredData,
                       celltypes = schepCelltypes, numregions = 50)

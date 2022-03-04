@@ -12,7 +12,7 @@
 #' @param newGranges granges of the peaks for the new data set
 #' @return A matrix of the projected patterns in the input data as well as
 #'   p-values for each element of that matrix.
-#' @examples data(schepCogapsResult)
+#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
 #' data(schepFilteredPeaks)
 #' data(schepGranges)
 #'
