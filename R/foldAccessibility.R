@@ -14,7 +14,7 @@
 #' @param binaryMatrix binarized scATAC data matrix
 #' @return Fold accessibility value as compared to average peaks for a given
 #'   cell type
-#' @examples data(schepFilteredData)
+#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepFilteredData.rda?raw=true")
 #' data(schepCelltypes)
 #' library(Homo.sapiens)
 #' geneList <- c("TAL1", "IRF1")

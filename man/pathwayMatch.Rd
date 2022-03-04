@@ -27,7 +27,7 @@ Takes the result of the genePatternMatch function and finds significantly
 enriched pathways for each pattern.
 }
 \examples{
-data(schepCogapsResult)
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
 data(schepGranges)
 
 genes = genePatternMatch(schepCogapsResult, 500, schepGranges, Homo.sapiens)

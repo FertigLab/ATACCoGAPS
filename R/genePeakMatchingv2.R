@@ -70,7 +70,7 @@ geneMatch = function(regionIndex, generanges, genome) {
 #'   top results are reasonably robust to using more stringent thresholds
 #' @return double nested list containing lists of the genes in, nearest, and
 #'   following the peaks matched each pattern
-#' @examples data(schepCogapsResult)
+#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
 #' data(schepGranges)
 #'
 #' genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens)

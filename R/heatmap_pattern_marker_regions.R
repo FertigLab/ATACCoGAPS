@@ -25,9 +25,9 @@
 #'   TRUE by default
 #' @param ... additional arguments to the heatmap.2 function
 #' @return heatmap of the accessibility for numregions for each pattern
-#' @examples data(schepCogapsResult)
+#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
 #' data(schepCelltypes)
-#' data(schepFilteredData)
+#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepFilteredData.rda?raw=true")
 #'
 #' heatmapPatternMarkers(schepCogapsResult, atac_data = schepFilteredData,
 #'                       celltypes = schepCelltypes, numregions = 50)

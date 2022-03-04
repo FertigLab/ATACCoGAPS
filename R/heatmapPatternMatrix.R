@@ -21,7 +21,7 @@
 #' @param rowColors vector of colors to plot along patterns, if NULL generated automatically
 #' @param ... additional arguments to the heatmap.2 function
 #' @return Heatmap of patternMatrix with color labels for samples
-#' @examples data(schepCogapsResult)
+#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
 #' data(schepCelltypes)
 #'
 #' heatmapPatternMatrix(schepCogapsResult, sample.classifier = schepCelltypes)

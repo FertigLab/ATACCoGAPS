@@ -18,7 +18,7 @@
 #' @examples library(Homo.sapiens)
 #' geneList <- c("TAL1", "EGR1")
 #' data(schepGranges)
-#' data(schepFilteredData)
+#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepFilteredData.rda?raw=true")
 #' data(schepCelltypes)
 #' accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = schepFilteredData, genome = Homo.sapiens)
 #' heatmapGeneAccessibility(genePeaks = accessiblePeaks$TAL1, celltypes = schepCelltypes)

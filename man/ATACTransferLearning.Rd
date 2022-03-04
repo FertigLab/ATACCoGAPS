@@ -34,7 +34,7 @@ atac data CoGAPS was run on and maps them to new data set the user wishes to
 project learned patterns into.
 }
 \examples{
-data(schepCogapsResult)
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
 data(schepFilteredPeaks)
 data(schepGranges)
 

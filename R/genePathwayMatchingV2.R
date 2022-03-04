@@ -45,7 +45,7 @@ paths = function(patGenes, pathways, pval_cut, pAdjustMethod) {
 #'
 #' @return List of gene overlap objects, pathways with significant overlap and
 #'   pathway names for each pattern
-#' @examples data(schepCogapsResult)
+#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
 #' data(schepGranges)
 #'
 #' genes = genePatternMatch(schepCogapsResult, 500, schepGranges, Homo.sapiens)
