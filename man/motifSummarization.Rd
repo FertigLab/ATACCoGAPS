@@ -4,8 +4,14 @@
 \alias{motifSummarization}
 \title{Map Peaks to DNA motifs in scATAC-seq Data}
 \usage{
-motifSummarization(motifList, scATACData, granges, genome, cellNames,
-  pCutoff = 5e-09)
+motifSummarization(
+  motifList,
+  scATACData,
+  granges,
+  genome,
+  cellNames,
+  pCutoff = 5e-09
+)
 }
 \arguments{
 \item{motifList}{PWMatrixList object of motifs (from the TFBS tools package)}

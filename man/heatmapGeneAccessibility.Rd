@@ -4,8 +4,14 @@
 \alias{heatmapGeneAccessibility}
 \title{Heatmap Gene Accessibility}
 \usage{
-heatmapGeneAccessibility(genePeaks, celltypes, colColors = NULL,
-  order = TRUE, seed = 42, ...)
+heatmapGeneAccessibility(
+  genePeaks,
+  celltypes,
+  colColors = NULL,
+  order = TRUE,
+  seed = 42,
+  ...
+)
 }
 \arguments{
 \item{genePeaks}{The peaks corresponding to a singular gene; one element of

@@ -4,9 +4,18 @@
 \alias{heatmapPatternMarkers}
 \title{Create Heatmap of PatternMarker Peaks}
 \usage{
-heatmapPatternMarkers(cgaps_result, atac_data, celltypes,
-  numregions = 50, colColors = NULL, rowColors = NULL,
-  patterns = NULL, seed = 42, order = TRUE, ...)
+heatmapPatternMarkers(
+  cgaps_result,
+  atac_data,
+  celltypes,
+  numregions = 50,
+  colColors = NULL,
+  rowColors = NULL,
+  patterns = NULL,
+  seed = 42,
+  order = TRUE,
+  ...
+)
 }
 \arguments{
 \item{cgaps_result}{CogapsResult object from CoGAPS run}

@@ -4,8 +4,13 @@
 \alias{dataSubsetBySparsity}
 \title{Filter scATACseq by sparsity}
 \usage{
-dataSubsetBySparsity(data, cell_list, peak_list, cell_cut = 0.99,
-  peak_cut = 0.99)
+dataSubsetBySparsity(
+  data,
+  cell_list,
+  peak_list,
+  cell_cut = 0.99,
+  peak_cut = 0.99
+)
 }
 \arguments{
 \item{data}{matrix of read counts peaks x cells}
@@ -28,9 +33,9 @@ Function to filter a set of scATACseq data by sparsity and return a subset of
 filtered data, as well as list of the remaining cells and peaks.
 }
 \examples{
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/schepATACPreFilter.Rdata?raw=true")
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/schepUnfilteredCells.Rdata?raw=true")
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/schepUnfilteredPeaks.Rdata?raw=true")
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/schepATACPreFilter.Rdata?raw=true")
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/schepUnfilteredCells.Rdata?raw=true")
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/schepUnfilteredPeaks.Rdata?raw=true")
 
 dataSubset = dataSubsetBySparsity(data = schepATACPreFilter, cell_list = schepUnfilteredCells, peak_list = schepUnfilteredPeaks, cell_cut = 0.99, peak_cut = 0.99)
 

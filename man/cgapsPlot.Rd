@@ -4,8 +4,16 @@
 \alias{cgapsPlot}
 \title{Plot Individual CoGAPS Patterns}
 \usage{
-cgapsPlot(cgaps_result, sample.classifier, cols = NULL, sort = TRUE,
-  patterns = NULL, matrix = FALSE, seed = 42, ...)
+cgapsPlot(
+  cgaps_result,
+  sample.classifier,
+  cols = NULL,
+  sort = TRUE,
+  patterns = NULL,
+  matrix = FALSE,
+  seed = 42,
+  ...
+)
 }
 \arguments{
 \item{cgaps_result}{CoGAPSResult object from a CoGAPS run or the pattern

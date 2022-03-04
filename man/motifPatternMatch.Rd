@@ -7,8 +7,14 @@
 \alias{getTFDescriptions}
 \title{Find Motifs and TFs from PatternMarker Peaks}
 \usage{
-motifPatternMatch(cogapsResult, generanges, motiflist, genome,
-  scoreThreshold = NULL, motifsPerRegion = 1)
+motifPatternMatch(
+  cogapsResult,
+  generanges,
+  motiflist,
+  genome,
+  scoreThreshold = NULL,
+  motifsPerRegion = 1
+)
 
 getTFs(motifList, tfData)
 
@@ -37,13 +43,11 @@ to reduce compute time, as results are quite robust across thresholds}
 
 \item{tfData}{dataframe of motifs and TFs from cisBP database}
 
-\item{TFs}{result from getTFs function}
+\item{TFs}{object of TF info returned from the getTFs function}
 
 \item{networks}{a list of regulatory networks of genes corresponding to TFs;
 we include humanRegNets and mouseRegNets, downloaded from the TTrust
 database (Han et al Nucleic Acid Res. 2018)}
-
-\item{TFs}{object of TF info returned from the getTFs function}
 }
 \value{
 motifPatternMatch: nested list of the top motif for each region for x

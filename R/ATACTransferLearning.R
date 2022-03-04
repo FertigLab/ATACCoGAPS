@@ -18,13 +18,13 @@
 #'
 #'
 #' #getting count matrix - peaks x cells
-#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroFinalSubsetData.Rdata?raw=true")
+#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/BuenrostroFinalSubsetData.Rdata?raw=true")
 #'
 #' #getting GRanges for peaks
-#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroGRanges.Rdata?raw=true")
+#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/BuenrostroGRanges.Rdata?raw=true")
 #'
 #' #getting celltypes
-#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroCellTypes.Rdata?raw=true")
+#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/BuenrostroCellTypes.Rdata?raw=true")
 #'
 #' projectRResults <- ATACTransferLearning(newData = BuenrostroFinalSubsetData, CoGAPSResult = schepCogapsResult, originalPeaks = schepFilteredPeaks, originalGranges = schepGranges,newGranges = BuenrostroGRanges)
 #' @export
