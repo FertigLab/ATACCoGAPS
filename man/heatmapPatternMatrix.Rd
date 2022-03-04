@@ -4,9 +4,17 @@
 \alias{heatmapPatternMatrix}
 \title{Plot the patternMatrix as a heatmap}
 \usage{
-heatmapPatternMatrix(cgaps_result, sample.classifier, cellCols = NULL,
-  sort = TRUE, patterns = NULL, matrix = FALSE, rowColors = NULL,
-  seed = 42, ...)
+heatmapPatternMatrix(
+  cgaps_result,
+  sample.classifier,
+  cellCols = NULL,
+  sort = TRUE,
+  patterns = NULL,
+  matrix = FALSE,
+  rowColors = NULL,
+  seed = 42,
+  ...
+)
 }
 \arguments{
 \item{cgaps_result}{CoGAPSResult object from a CoGAPS run or the pattern

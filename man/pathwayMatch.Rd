@@ -4,8 +4,7 @@
 \alias{pathwayMatch}
 \title{Matches list of genes to pathways}
 \usage{
-pathwayMatch(gene_list, pathways, p_threshold = 0.05,
-  pAdjustMethod = "BH")
+pathwayMatch(gene_list, pathways, p_threshold = 0.05, pAdjustMethod = "BH")
 }
 \arguments{
 \item{gene_list}{Result from the genePatternMatch function, a list of genes

@@ -4,8 +4,13 @@
 \alias{ATACTransferLearning}
 \title{Transfer Learning between ATACseq data sets using projectR}
 \usage{
-ATACTransferLearning(newData, CoGAPSResult, originalPeaks, originalGranges,
-  newGranges)
+ATACTransferLearning(
+  newData,
+  CoGAPSResult,
+  originalPeaks,
+  originalGranges,
+  newGranges
+)
 }
 \arguments{
 \item{newData}{the ATAC data to project into}
@@ -35,13 +40,13 @@ data(schepGranges)
 
 
 #getting count matrix - peaks x cells
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroFinalSubsetData.Rdata?raw=true")
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/BuenrostroFinalSubsetData.Rdata?raw=true")
 
 #getting GRanges for peaks
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroGRanges.Rdata?raw=true")
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/BuenrostroGRanges.Rdata?raw=true")
 
 #getting celltypes
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/master/BuenrostroCellTypes.Rdata?raw=true")
+repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/BuenrostroCellTypes.Rdata?raw=true")
 
 projectRResults <- ATACTransferLearning(newData = BuenrostroFinalSubsetData, CoGAPSResult = schepCogapsResult, originalPeaks = schepFilteredPeaks, originalGranges = schepGranges,newGranges = BuenrostroGRanges)
 }

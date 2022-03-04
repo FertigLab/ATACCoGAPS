@@ -4,8 +4,13 @@
 \alias{applyGREAT}
 \title{Find Enrichment of GO Terms in PatternMarker Peaks using GREAT}
 \usage{
-applyGREAT(cogapsResult, granges, genome, scoreThreshold = NULL,
-  GREATCategory = "GO")
+applyGREAT(
+  cogapsResult,
+  granges,
+  genome,
+  scoreThreshold = NULL,
+  GREATCategory = "GO"
+)
 }
 \arguments{
 \item{cogapsResult}{result object from CoGAPS}

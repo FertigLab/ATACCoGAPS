@@ -4,8 +4,13 @@
 \alias{RNAseqTFValidation}
 \title{Validate TF Findings with RNA-seq CoGAPS}
 \usage{
-RNAseqTFValidation(TFGenes, RNACoGAPSResult, ATACPatternSet, RNAPatternSet,
-  matrix = FALSE)
+RNAseqTFValidation(
+  TFGenes,
+  RNACoGAPSResult,
+  ATACPatternSet,
+  RNAPatternSet,
+  matrix = FALSE
+)
 }
 \arguments{
 \item{TFGenes}{genes regulated by the TFs as returned by simpleMotifTFMatch()

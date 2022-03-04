@@ -8,7 +8,6 @@ Authors@R:
            comment = c(ORCID = "0000-0002-3423-2104"),
            email = "rerbe1@jhmi.edu")
 Description: Provides tools for running the CoGAPS algorithm (Fertig et al, 2010) on single-cell ATAC sequencing data and analysis of the results. Can be used to perform analyses at the level of genes, motifs, TFs, or pathways. Additionally provides tools for transfer learning and data integration with single-cell RNA sequencing data.
-
 License: Artistic-2.0
 Depends:
   R (>= 3.5.0),
@@ -33,7 +32,7 @@ Imports:
     Mus.musculus
 biocViews: GenomicFeatures, CoGAPS
 BiocType: Software
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Encoding: UTF-8
 Suggests: 
     knitr
