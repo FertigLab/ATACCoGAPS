@@ -14,14 +14,14 @@
 #' @param binaryMatrix binarized scATAC data matrix
 #' @return Fold accessibility value as compared to average peaks for a given
 #'   cell type
-#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepFilteredData.rda?raw=true")
-#' data(schepCelltypes)
+#' @examples data("subsetSchepData")
+#' data(schepCellTypes)
 #' library(Homo.sapiens)
 #' geneList <- c("TAL1", "IRF1")
 #' data(schepGranges)
-#' binarizedData <- (schepFilteredData > 0) + 0
-#' accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = schepFilteredData, genome = Homo.sapiens)
-#' foldAccessibility(peaksAccessibility = accessiblePeaks$TAL1, cellTypeList = schepCelltypes, cellType = "K562 Erythroleukemia", binaryMatrix = binarizedData)
+#' binarizedData <- (subsetSchepData > 0) + 0
+#' accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = subsetSchepData, genome = Homo.sapiens)
+#' foldAccessibility(peaksAccessibility = accessiblePeaks$TAL1, cellTypeList = schepCellTypes, cellType = "K562 Erythroleukemia", binaryMatrix = binarizedData)
 #' @export
 foldAccessibility <- function(peaksAccessibility, cellTypeList, cellType, binaryMatrix) {
   
