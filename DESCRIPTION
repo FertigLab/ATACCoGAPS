@@ -30,6 +30,8 @@ Imports:
     JASPAR2016,
     Homo.sapiens,
     Mus.musculus
+Suggests:
+    repmis
 biocViews: GenomicFeatures, CoGAPS
 BiocType: Software
 RoxygenNote: 7.1.1

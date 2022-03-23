@@ -14,7 +14,7 @@
 #' @param GREATCategory input to the category argument of the rGREAT 
 #' getEnrichmentTables function. Usually "GO" or "Genes"
 #' @return list containing enrichment results for each pattern
-#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
+#' @examples data("schepCogapsResult")
 #' data(schepGranges)
 #'
 #' GOenrichment <- applyGREAT(cogapsResult = schepCogapsResult, granges = schepGranges, genome = "hg19")

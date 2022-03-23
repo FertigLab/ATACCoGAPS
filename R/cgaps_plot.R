@@ -21,10 +21,10 @@
 #' @param ... addition arguments to plot function
 #' @return Series of plots of pattern matrix patterns colored by cell
 #'   classifications
-#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
-#' data(schepCelltypes)
+#' @examples data("schepCogapsResult")
+#' data(schepCellTypes)
 #'
-#' cgapsPlot(schepCogapsResult, schepCelltypes)
+#' cgapsPlot(schepCogapsResult, schepCellTypes)
 #' @export
 
 cgapsPlot = function(cgaps_result, sample.classifier, cols = NULL, sort = TRUE,

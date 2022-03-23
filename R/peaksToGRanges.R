@@ -11,9 +11,9 @@
 #' @return GRanges corrsponding to input list of region information
 #' @section Note: If region_list is a dataframe you should use the GenomicRanges
 #'   function makeGRangesFromDataFrame which this function applies
-#' @examples data(schepFilteredPeaks)
+#' @examples data(schepPeaks)
 #'
-#' schepGranges = peaksToGRanges(schepFilteredPeaks, sep = "-")
+#' schepGranges = peaksToGRanges(schepPeaks, sep = "-")
 #' @export
 peaksToGRanges = function(region_list, sep) {
 

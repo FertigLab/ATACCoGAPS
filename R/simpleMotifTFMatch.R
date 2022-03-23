@@ -23,7 +23,7 @@
 #'   regulatory gene networks known for those TFs, functional annotations,
 #'   summary showing how many times each TF was matched to a peak, and the
 #'   downloaded set of motifs for the user to save for reproducibility
-#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
+#' @examples data("schepCogapsResult")
 #' data(schepGranges)
 #'
 #' motifResults = simpleMotifTFMatch(schepCogapsResult,

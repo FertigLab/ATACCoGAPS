@@ -5,7 +5,7 @@
 #' 
 #' @param cgapsResult a CoGAPSResult object
 #' @return list containing a prediction matrix and vector classifying cells to patterns
-#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
+#' @examples data("schepCogapsResult")
 #' pClass <- patternMarkerClassifier(schepCogapsResult)
 #' @export
 patternMarkerCellClassifier <- function(cgapsResult) {
