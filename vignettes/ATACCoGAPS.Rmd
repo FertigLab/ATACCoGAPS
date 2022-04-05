@@ -59,7 +59,7 @@ cgapsPlot(cgaps_result = schepCogapsResult, sample.classifier = schepCellTypes, 
 ```
 
 Or all together in a heatmap
-```{r}
+```{r, fig.width=8, fig.height=8}
 heatmapPatternMatrix(cgaps_result = schepCogapsResult, sample.classifier = schepCellTypes, cellCols = col, col = viridis::magma(n=9))
 ```
 
@@ -74,7 +74,7 @@ We see that pattern 5 is most strongly associated with the K562 cells.
 
 
 If we do not have pre-established cell annotations, we can cluster cells by pattern association.
-```{r}
+```{r, fig.width=8, fig.height=8}
 cellClass <- patternMarkerCellClassifier(schepCogapsResult)
 cellClasses <- cellClass$cellClassifier
 
@@ -87,7 +87,7 @@ heatmapPatternMatrix(schepCogapsResult, as.factor(cellClasses), col = viridis::m
 Now that we know which patterns distinguish which cell types, we can look at those same patterns in the amplitude matrix (peaks by patterns) to determine which peaks are differentially accessible between the patterns and thus which peaks are differentially accessible between the cell types.
 
 We can use the patternMarker Statistic (Stein-O'Brien et al, 2017) to find which peaks are most differentially accessible. To show the degree of differentiation, we can plot the most pattern differentiating peaks for each pattern from the original data.
-```{r}
+```{r, fig.width=8, fig.height=8}
 heatmapPatternMarkers(cgaps_result = schepCogapsResult, atac_data = subsetSchepData, celltypes = schepCellTypes, numregions = 5, colColors = col, col = viridis::plasma(n = 2))
 ```
 
