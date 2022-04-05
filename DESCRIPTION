@@ -30,12 +30,11 @@ Imports:
     JASPAR2016,
     Homo.sapiens,
     Mus.musculus
-Suggests:
-    repmis
 biocViews: GenomicFeatures, CoGAPS
 BiocType: Software
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 Suggests: 
-    knitr
+    knitr,
+    repmis
 VignetteBuilder: knitr

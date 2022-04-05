@@ -28,7 +28,7 @@ data("schepCellTypes")
 
 We use these data to set the hyperparameters of the CoGAPS algorithm. Here we tell CoGAPS to find 7 patterns in 10000 iterations of the algorithm. We use the sparseOptimization method as our data are sparse single-cell data. We run the algorithm distributed across the genome since we have more genomic features than cells (if it was the opposite we would set the distributed pattern to "single-cell"). We then input the peak and cell type information to be returned as part of our result object. 
 ```{r}
-params <- CogapsParams(nPatterns=7, nIterations=10000, seed=42, sparseOptimization=TRUE, distributed="genome-wide", geneNames=schepPeaks, sampleNames=as.character(schepSubCellTypes))
+params <- CogapsParams(nPatterns=7, nIterations=10000, seed=42, sparseOptimization=TRUE, distributed="genome-wide", geneNames=schepPeaks, sampleNames=as.character(schepCellTypes))
 
 params
 ```
@@ -55,12 +55,12 @@ We can either plot each pattern indvidually
 col <- viridis::plasma(n=12)
 
 
-cgapsPlot(cgaps_result = schepCogapsResult, sample.classifier = schepSubCellTypes, cols = col, ylab = "Pattern Weight")
+cgapsPlot(cgaps_result = schepCogapsResult, sample.classifier = schepCellTypes, cols = col, ylab = "Pattern Weight")
 ```
 
 Or all together in a heatmap
 ```{r}
-heatmapPatternMatrix(cgaps_result = schepCogapsResult, sample.classifier = schepSubCellTypes, cellCols = col, col = viridis::magma(n=9))
+heatmapPatternMatrix(cgaps_result = schepCogapsResult, sample.classifier = schepCellTypes, cellCols = col, col = viridis::magma(n=9))
 ```
 
 We can note which patterns differentiate which cell types (for example that pattern 9 seems to be defining the LCL cells). If any patterns are unclear, such as pattern 5, we can perform a Wilcoxon Rank Sum test to determine which cell types are most significantly associated with the pattern.
@@ -68,7 +68,7 @@ We can note which patterns differentiate which cell types (for example that patt
 #get the pattern Matrix
 patMatrix <- getSampleFactors(schepCogapsResult)
 #perform a pairwise Wilcoxon test
-pairwise.wilcox.test(patMatrix[,5], schepSubCellTypes, p.adjust.method = "BH")
+pairwise.wilcox.test(patMatrix[,5], schepCellTypes, p.adjust.method = "BH")
 ```
 We see that pattern 5 is most strongly associated with the K562 cells.
 
@@ -88,7 +88,7 @@ Now that we know which patterns distinguish which cell types, we can look at tho
 
 We can use the patternMarker Statistic (Stein-O'Brien et al, 2017) to find which peaks are most differentially accessible. To show the degree of differentiation, we can plot the most pattern differentiating peaks for each pattern from the original data.
 ```{r}
-heatmapPatternMarkers(cgaps_result = schepCogapsResult, atac_data = subsetSchepData, celltypes = schepSubCellTypes, numregions = 5, colColors = col, col = viridis::plasma(n = 2))
+heatmapPatternMarkers(cgaps_result = schepCogapsResult, atac_data = subsetSchepData, celltypes = schepCellTypes, numregions = 5, colColors = col, col = viridis::plasma(n = 2))
 ```
 
 
@@ -145,7 +145,7 @@ EGR1peaks <- geneAccessibility("EGR1", schepGranges, subsetSchepData, Homo.sapie
 binaryMatrix <- (subsetSchepData > 0) + 0
 
 #find accessibility of those peaks relative to others among monocyte cells
-foldAccessibility(peaksAccessibility = EGR1peaks$EGR1, cellTypeList = schepSubCellTypes, cellType = "Monocyte", binaryMatrix = binaryMatrix)
+foldAccessibility(peaksAccessibility = EGR1peaks$EGR1, cellTypeList = schepCellTypes, cellType = "Monocyte", binaryMatrix = binaryMatrix)
 ```
 EGR1 is 1.42 times more accessible than average in Monocytes
 
