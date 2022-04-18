@@ -22,8 +22,8 @@ data CoGAPS was applied to}
 function from the rGREAT package (e.g. "hg19")}
 
 \item{scoreThreshold}{threshold of PatternMarker score to take peaks for
-analysis, higher values return more peaks. Defaults to use all PatternMarker
-genes with value NULL}
+analysis, higher values return more peaks. Defaults to use all
+PatternMarker genes with value NULL}
 
 \item{GREATCategory}{input to the category argument of the rGREAT 
 getEnrichmentTables function. Usually "GO" or "Genes"}
@@ -32,11 +32,12 @@ getEnrichmentTables function. Usually "GO" or "Genes"}
 list containing enrichment results for each pattern
 }
 \description{
-Use the rGREAT package to find enrichment of GO terms or genes for the peaks found to
-be most pattern differentiating using the PatternMarker statistic.
+Use the rGREAT package to find enrichment of GO terms or genes for
+the peaks found to be most pattern differentiating using the
+PatternMarker statistic.
 }
 \examples{
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
+data("schepCogapsResult")
 data(schepGranges)
 
 GOenrichment <- applyGREAT(cogapsResult = schepCogapsResult, granges = schepGranges, genome = "hg19")

@@ -27,7 +27,7 @@ because this is a common format to receive peak information.
 }
 
 \examples{
-data(schepFilteredPeaks)
+data(schepPeaks)
 
-schepGranges = peaksToGRanges(schepFilteredPeaks, sep = "-")
+schepGranges = peaksToGRanges(schepPeaks, sep = "-")
 }

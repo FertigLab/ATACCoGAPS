@@ -51,8 +51,8 @@ the data as a heatmap. Intended to visualize the celltypes distinguished by
 the patterns found by CoGAPS.
 }
 \examples{
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
-data(schepCelltypes)
+data("schepCogapsResult")
+data(schepCellTypes)
 
-heatmapPatternMatrix(schepCogapsResult, sample.classifier = schepCelltypes)
+heatmapPatternMatrix(schepCogapsResult, sample.classifier = schepCellTypes)
 }

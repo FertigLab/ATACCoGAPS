@@ -17,6 +17,6 @@ Use the patternMarker statistic to determine which cells belong to each
 pattern in the data
 }
 \examples{
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
+data("schepCogapsResult")
 pClass <- patternMarkerClassifier(schepCogapsResult)
 }
