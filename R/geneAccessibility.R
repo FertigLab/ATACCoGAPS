@@ -21,7 +21,7 @@
 #' @export
 geneAccessibility <- function(geneList, peakGranges, atacData, genome) {
   genes <- geneRanges(genome) #uses geneRanges function from genePeakMatching.R file
-  symbols <- mcols(genes)[["SYMBOL"]]
+  symbols <- GenomicRanges::mcols(genes)[["SYMBOL"]]
   #get promoters
   prms = GenomicFeatures::promoters(GenomicFeatures::genes(genome, columns = "SYMBOL"),
                                     upstream = 1500, downstream = 500)
@@ -35,7 +35,7 @@ geneAccessibility <- function(geneList, peakGranges, atacData, genome) {
   listedGenes <- genes[geneInds]
   
   #promoters
-  prmsymbols = unlist(mcols(prms)[["SYMBOL"]])
+  prmsymbols = unlist(GenomicRanges::mcols(prms)[["SYMBOL"]])
   prmInds = which(prmsymbols %in% geneList)
   listedPromoters <- prms[prmInds]
   
@@ -50,7 +50,7 @@ geneAccessibility <- function(geneList, peakGranges, atacData, genome) {
     olapInds2 <- subjectHits(olap2)
     
     if(length(olapInds1) == 0 & length(olapInds2) == 0) {
-      print(paste("No overlapping peaks with", mcols(listedGenes)[["SYMBOL"]][i]))
+      print(paste("No overlapping peaks with", GenomicRanges::mcols(listedGenes)[["SYMBOL"]][i]))
       toRemove <- c(toRemove, i)
     }
     else{

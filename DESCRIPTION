@@ -1,6 +1,6 @@
 Package: ATACCoGAPS
 Title: Analysis Tools for scATACseq Data with CoGAPS
-Version: 0.99.0
+Version: 0.99.1
 Authors@R: 
     person(given = "Rossin",
            family = "Erbe",
@@ -30,11 +30,10 @@ Imports:
     JASPAR2016,
     Homo.sapiens,
     Mus.musculus
-biocViews: GenomicFeatures, CoGAPS
+biocViews: Software, ResearchField, Epigenetics, SingleCell
 BiocType: Software
 RoxygenNote: 7.1.1
 Encoding: UTF-8
 Suggests: 
-    knitr,
-    repmis
+    knitr
 VignetteBuilder: knitr

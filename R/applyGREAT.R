@@ -1,7 +1,8 @@
 #' Find Enrichment of GO Terms in PatternMarker Peaks using GREAT
 #'
-#' Use the rGREAT package to find enrichment of GO terms or genes for the peaks found to
-#' be most pattern differentiating using the PatternMarker statistic.
+#' Use the rGREAT package to find enrichment of GO terms or genes for
+#' the peaks found to be most pattern differentiating using the
+#' PatternMarker statistic.
 #'
 #' @param cogapsResult result object from CoGAPS
 #' @param granges GRanges object corresponding to the peaks of the scATAC-seq
@@ -9,8 +10,8 @@
 #' @param genome UCSC genome designation for input to the sumbitGreatJob
 #'   function from the rGREAT package (e.g. "hg19")
 #' @param scoreThreshold threshold of PatternMarker score to take peaks for
-#'   analysis, higher values return more peaks. Defaults to use all PatternMarker
-#'   genes with value NULL
+#'   analysis, higher values return more peaks. Defaults to use all
+#'   PatternMarker genes with value NULL
 #' @param GREATCategory input to the category argument of the rGREAT 
 #' getEnrichmentTables function. Usually "GO" or "Genes"
 #' @return list containing enrichment results for each pattern
@@ -21,7 +22,8 @@
 #' @export
 
 
-applyGREAT <- function(cogapsResult, granges, genome, scoreThreshold = NULL, GREATCategory = "GO") {
+applyGREAT <- function(cogapsResult, granges, genome,
+                       scoreThreshold = NULL, GREATCategory = "GO") {
   
   #get PatternMarker peak indices
   patMarkers = CoGAPS::patternMarkers(cogapsResult)

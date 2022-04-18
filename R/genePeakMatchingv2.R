@@ -4,10 +4,10 @@
 geneRanges = function(txdb) {
   #get granges with gene symmbol metadata
   g = GenomicFeatures::genes(txdb, columns="SYMBOL")
-  col = mcols(g)[["SYMBOL"]]
+  col = GenomicRanges::mcols(g)[["SYMBOL"]]
   #create GRanges without metadata to make gene symbols character vector
-  genes = GenomicRanges::granges(g)[rep(seq_along(g), elementNROWS(col))]
-  mcols(genes)[["SYMBOL"]] = as.character(unlist(col))
+  genes = GenomicRanges::granges(g)[rep(seq_along(g), IRanges::elementNROWS(col))]
+  GenomicRanges::mcols(genes)[["SYMBOL"]] = as.character(unlist(col))
   genes
 }
 
@@ -17,7 +17,7 @@ findOverlap = function(query, subject) {
   #of known genes
   olaps = GenomicRanges::findOverlaps(query, subject, ignore.strand = TRUE)
   #get symbols
-  symbols = mcols(query)[["SYMBOL"]][queryHits(olaps)]
+  symbols = GenomicRanges::mcols(query)[["SYMBOL"]][queryHits(olaps)]
 
   return(symbols)
 }
