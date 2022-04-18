@@ -12,21 +12,7 @@
 #' @param newGranges granges of the peaks for the new data set
 #' @return A matrix of the projected patterns in the input data as well as
 #'   p-values for each element of that matrix.
-#' @examples data("schepCogapsResult")
-#' data(schepPeaks)
-#' data(schepGranges)
-#'
-#'
-#' #getting count matrix - peaks x cells
-#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/BuenrostroFinalSubsetData.Rdata?raw=true")
-#'
-#' #getting GRanges for peaks
-#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/BuenrostroGRanges.Rdata?raw=true")
-#'
-#' #getting celltypes
-#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/BuenrostroCellTypes.Rdata?raw=true")
-#'
-#' projectRResults <- ATACTransferLearning(newData = BuenrostroFinalSubsetData, CoGAPSResult = schepCogapsResult, originalPeaks = schepPeaks, originalGranges = schepGranges,newGranges = BuenrostroGRanges)
+#' 
 #' @export
 
 
@@ -38,7 +24,7 @@ ATACTransferLearning = function(newData, CoGAPSResult, originalPeaks,
   newDataSub = newData[olaps[,2],]
 
   pR = projectR::projectR(newDataSub, CoGAPSResult, olap_peaks, originalPeaks,
-                          full = T)
+                          full = TRUE)
 
   return(pR)
 }

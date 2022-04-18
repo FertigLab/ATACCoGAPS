@@ -50,8 +50,8 @@ simpleMotifTFMatch = function(cogapsResult, generanges, organism,
   for(i in seq_along(patternJMotifs)) {
     motifNames = names(unlist(patternJMotifs[[i]]))
     splitNames = unlist(lapply(motifNames, stringr::str_split, "_"))
-    tfNames = splitNames[which(c(1:length(splitNames))%%2==0)]
-    motifNames = splitNames[which(c(1:length(splitNames))%%2==1)]
+    tfNames = splitNames[which(c(seq_len(splitNames))%%2==0)]
+    motifNames = splitNames[which(c(seq_len(splitNames))%%2==1)]
     tfNameList[[i]] = tfNames
     motifNameList[[i]] = motifNames
   }
@@ -62,7 +62,7 @@ simpleMotifTFMatch = function(cogapsResult, generanges, organism,
     summs[[i]]=summary(patTFs)
   }
 
-  summs= lapply(summs, sort, decreasing = T)
+  summs= lapply(summs, sort, decreasing = TRUE)
 
   regNetList = vector("list", length(tfNameList))
   for(i in seq_along(tfNameList)) {

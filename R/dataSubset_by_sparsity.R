@@ -11,12 +11,7 @@
 #' @param peak_cut threshold of sparsity to filter at for peaks
 #' @return nested list containing the subset data, a list of peaks, and list of
 #'   cells
-#' @examples repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/schepATACPreFilter.Rdata?raw=true")
-#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/schepUnfilteredCells.Rdata?raw=true")
-#' repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/schepUnfilteredPeaks.Rdata?raw=true")
-#' 
-#' dataSubset = dataSubsetBySparsity(data = schepATACPreFilter, cell_list = schepUnfilteredCells, peak_list = schepUnfilteredPeaks, cell_cut = 0.99, peak_cut = 0.99)
-#' 
+#'   
 #' @export
 dataSubsetBySparsity = function(data, cell_list, peak_list, cell_cut = 0.99, peak_cut = 0.99) {
 
@@ -24,14 +19,14 @@ dataSubsetBySparsity = function(data, cell_list, peak_list, cell_cut = 0.99, pea
   peaks_sparsity = apply(data, 1, function(x){sum(x==0)/length(x)})
 
   #print the number of peaks being filtered from the data
-  print(paste("Peaks to be filtered:", sum(peaks_sparsity > peak_cut)), quote = F)
+  print(paste("Peaks to be filtered:", sum(peaks_sparsity > peak_cut)), quote = FALSE)
 
 
   #find the sparsity for each cell in the data
   cells_sparsity = apply(data, 2, function(x){sum(x==0)/length(x)})
 
   #print the number of cells being filtered from the data
-  print(paste("Cells to be filtered:", sum(cells_sparsity > cell_cut)), quote = F)
+  print(paste("Cells to be filtered:", sum(cells_sparsity > cell_cut)), quote = FALSE)
 
   #create new list of peaks that will be kept in output data
   peaks_to_remove = which(peaks_sparsity > peak_cut)

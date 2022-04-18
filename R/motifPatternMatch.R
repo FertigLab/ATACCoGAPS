@@ -14,7 +14,7 @@ patternAccessibleMotifs = function(pattern, generanges, motifs, genome,
   #find the mostly closely matching motif for each region
   topMotifs = vector(mode = "list", nrow(motif.scores))
   for(i in seq(nrow(motif.scores))) {
-    topScores = sort(motif.scores[i,], decreasing = T)[seq(motifsPerRegion)]
+    topScores = sort(motif.scores[i,], decreasing = TRUE)[seq(motifsPerRegion)]
     if(topScores==0){
       topMotifs[i] = "NoMatchedMotif_NoMatchedTF"
       names(topMotifs)[i] = "NoMatchedMotif_NoMatchedTF"
@@ -121,7 +121,7 @@ getTFs = function(motifList, tfData) {
     summaryList[[i]] = TF_summary
   }
 
-  summaryList = lapply(summaryList, sort, decreasing = T)
+  summaryList = lapply(summaryList, sort, decreasing = TRUE)
 
   return(list(matchInfoList, summaryList))
 }
