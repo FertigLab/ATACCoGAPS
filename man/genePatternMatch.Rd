@@ -32,7 +32,7 @@ gene and the nearest gene following the region. Note: a TxDb object for the
 genome of interest must be loaded prior to running this function.
 }
 \examples{
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
+data("schepCogapsResult")
 data(schepGranges)
 
 genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens)

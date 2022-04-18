@@ -49,8 +49,8 @@ color by cell classifier information to identify which patterns identify
 which cell classes.
 }
 \examples{
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
-data(schepCelltypes)
+data("schepCogapsResult")
+data(schepCellTypes)
 
-cgapsPlot(schepCogapsResult, schepCelltypes)
+cgapsPlot(schepCogapsResult, schepCellTypes)
 }

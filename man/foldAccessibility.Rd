@@ -29,12 +29,12 @@ accessibility (and thus implying possible transcription), with values lower
 than 1 indicating the opposite.
 }
 \examples{
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepFilteredData.rda?raw=true")
-data(schepCelltypes)
+data("subsetSchepData")
+data(schepCellTypes)
 library(Homo.sapiens)
 geneList <- c("TAL1", "IRF1")
 data(schepGranges)
-binarizedData <- (schepFilteredData > 0) + 0
-accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = schepFilteredData, genome = Homo.sapiens)
-foldAccessibility(peaksAccessibility = accessiblePeaks$TAL1, cellTypeList = schepCelltypes, cellType = "K562 Erythroleukemia", binaryMatrix = binarizedData)
+binarizedData <- (subsetSchepData > 0) + 0
+accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = subsetSchepData, genome = Homo.sapiens)
+foldAccessibility(peaksAccessibility = accessiblePeaks$TAL1, cellTypeList = schepCellTypes, cellType = "K562 Erythroleukemia", binaryMatrix = binarizedData)
 }

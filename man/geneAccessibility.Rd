@@ -31,6 +31,6 @@ binarized accesibility data for those peaks
 library(Homo.sapiens)
 geneList <- c("TAL1", "IRF1")
 data(schepGranges)
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepFilteredData.rda?raw=true")
-accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = schepFilteredData, genome = Homo.sapiens)
+data("subsetSchepData")
+accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = subsetSchepData, genome = Homo.sapiens)
 }

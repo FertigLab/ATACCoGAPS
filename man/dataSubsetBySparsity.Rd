@@ -32,11 +32,3 @@ nested list containing the subset data, a list of peaks, and list of
 Function to filter a set of scATACseq data by sparsity and return a subset of
 filtered data, as well as list of the remaining cells and peaks.
 }
-\examples{
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/schepATACPreFilter.Rdata?raw=true")
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/schepUnfilteredCells.Rdata?raw=true")
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/schepUnfilteredPeaks.Rdata?raw=true")
-
-dataSubset = dataSubsetBySparsity(data = schepATACPreFilter, cell_list = schepUnfilteredCells, peak_list = schepUnfilteredPeaks, cell_cut = 0.99, peak_cut = 0.99)
-
-}

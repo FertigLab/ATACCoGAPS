@@ -47,7 +47,7 @@ regulatory mechanisms operating in the cell types of interest within the
 data.
 }
 \examples{
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepCogapsResult.rda?raw=true")
+data("schepCogapsResult")
 data(schepGranges)
 
 motifResults = simpleMotifTFMatch(schepCogapsResult,

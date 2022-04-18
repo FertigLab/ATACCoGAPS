@@ -42,8 +42,8 @@ accessible peaks for a particular gene.
 library(Homo.sapiens)
 geneList <- c("TAL1", "EGR1")
 data(schepGranges)
-repmis::source_data("https://github.com/FertigLab/ATACCoGAPS/blob/PaperVersion/data/schepFilteredData.rda?raw=true")
-data(schepCelltypes)
-accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = schepFilteredData, genome = Homo.sapiens)
-heatmapGeneAccessibility(genePeaks = accessiblePeaks$TAL1, celltypes = schepCelltypes)
+data("subsetSchepData")
+data(schepCellTypes)
+accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = subsetSchepData, genome = Homo.sapiens)
+heatmapGeneAccessibility(genePeaks = accessiblePeaks$TAL1, celltypes = schepCellTypes)
 }
