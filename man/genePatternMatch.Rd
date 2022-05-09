@@ -35,5 +35,7 @@ genome of interest must be loaded prior to running this function.
 data("schepCogapsResult")
 data(schepGranges)
 
+library(Homo.sapiens)
+
 genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens)
 }

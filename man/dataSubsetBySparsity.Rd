@@ -32,3 +32,11 @@ nested list containing the subset data, a list of peaks, and list of
 Function to filter a set of scATACseq data by sparsity and return a subset of
 filtered data, as well as list of the remaining cells and peaks.
 }
+\examples{
+data("subsetSchepData")
+data("schepPeaks")
+data("schepCellTypes")
+
+outData = dataSubsetBySparsity(subsetSchepData, schepCellTypes, schepPeaks)
+  
+}

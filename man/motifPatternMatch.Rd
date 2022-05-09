@@ -78,3 +78,35 @@ function to a list of regulatory networks of genes known for those TFs
 list of TFs from the getTFs function
 }}
 
+\examples{
+data(exampleMotifList)
+data(schepGranges)
+data(schepCogapsResult)
+
+motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges, exampleMotifList, "hg19")
+data(exampleMotifList)
+data(schepGranges)
+data(schepCogapsResult)
+data(tfData)
+
+motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges, exampleMotifList, "hg19")
+motifTFs = getTFs(motifsByPattern, tfData)
+data(exampleMotifList)
+data(schepGranges)
+data(schepCogapsResult)
+data(tfData)
+
+motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges, exampleMotifList, "hg19")
+motifTFs = getTFs(motifsByPattern, tfData)
+
+regNets = findRegulatoryNetworks(motifTFs, ATACCoGAPS:::humanRegNets)
+data(exampleMotifList)
+data(schepGranges)
+data(schepCogapsResult)
+data(tfData)
+
+motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges, exampleMotifList, "hg19")
+motifTFs = getTFs(motifsByPattern, tfData)
+
+tfDesc = getTFDescriptions(motifTFs)
+}

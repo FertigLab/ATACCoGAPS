@@ -39,7 +39,7 @@ package to find enrichment of PatternMarker genes among genes regulated by
 identified candidate TFs
 }
 \examples{
-\dontrun{
+\donttest{
 gseaList = RNAseqTFValidation(TFMatchResult$RegulatoryNetworks, RNACoGAPS, c(1,3), c(2,7), matrix = FALSE)
 }
 }
