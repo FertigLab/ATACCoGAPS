@@ -26,8 +26,8 @@
 #' @examples data("schepCogapsResult")
 #' data(schepGranges)
 #'
-#' motifResults = simpleMotifTFMatch(schepCogapsResult,
-#'  generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", scoreThreshold = 0.05)
+#' motifResults = simpleMotifTFMatch(cogapsResult = schepCogapsResult, generanges = schepGranges,
+#'  organism = "Homo sapiens", genome = "hg19", motifsPerRegion = 1)
 #' @export
 simpleMotifTFMatch = function(cogapsResult, generanges, organism,
                             genome, scoreThreshold = NULL, motifsPerRegion = 1) {

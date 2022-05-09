@@ -47,8 +47,9 @@ paths = function(patGenes, pathways, pval_cut, pAdjustMethod) {
 #'   pathway names for each pattern
 #' @examples data("schepCogapsResult")
 #' data(schepGranges)
+#' library(Homo.sapiens)
 #'
-#' genes = genePatternMatch(schepCogapsResult, 500, schepGranges, Homo.sapiens)
+#' genes <- genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens)
 #' 
 #' library(dplyr)
 #' pathways = msigdbr::msigdbr(species = "Homo sapiens", category =

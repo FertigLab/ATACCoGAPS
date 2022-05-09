@@ -35,7 +35,7 @@ summary. Uses motifmatchr to prepare data for CoGAPS run using motif
 summarization
 }
 \examples{
-\donttest{
+\dontrun{
 motifSummTest = motifSummarization(motifList = motifs, scATACData = scatac, granges = peakGranges, genome = "hg19", cellNames = cells, pCutoff = 5e-09)
 }
 }

@@ -18,5 +18,5 @@ pattern in the data
 }
 \examples{
 data("schepCogapsResult")
-pClass <- patternMarkerClassifier(schepCogapsResult)
+pClass <- patternMarkerCellClassifier(schepCogapsResult)
 }

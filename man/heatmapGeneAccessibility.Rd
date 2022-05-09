@@ -45,5 +45,5 @@ data(schepGranges)
 data("subsetSchepData")
 data(schepCellTypes)
 accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = subsetSchepData, genome = Homo.sapiens)
-heatmapGeneAccessibility(genePeaks = accessiblePeaks$TAL1, celltypes = schepCellTypes)
+heatmapGeneAccessibility(genePeaks = accessiblePeaks$EGR1, celltypes = schepCellTypes)
 }

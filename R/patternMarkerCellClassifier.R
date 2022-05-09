@@ -6,7 +6,7 @@
 #' @param cgapsResult a CoGAPSResult object
 #' @return list containing a prediction matrix and vector classifying cells to patterns
 #' @examples data("schepCogapsResult")
-#' pClass <- patternMarkerClassifier(schepCogapsResult)
+#' pClass <- patternMarkerCellClassifier(schepCogapsResult)
 #' @export
 patternMarkerCellClassifier <- function(cgapsResult) {
   

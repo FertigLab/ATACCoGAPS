@@ -50,6 +50,6 @@ data.
 data("schepCogapsResult")
 data(schepGranges)
 
-motifResults = simpleMotifTFMatch(schepCogapsResult,
- generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", scoreThreshold = 0.05)
+motifResults = simpleMotifTFMatch(cogapsResult = schepCogapsResult, generanges = schepGranges,
+ organism = "Homo sapiens", genome = "hg19", motifsPerRegion = 1)
 }
