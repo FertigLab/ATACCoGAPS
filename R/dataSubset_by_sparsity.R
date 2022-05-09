@@ -11,6 +11,11 @@
 #' @param peak_cut threshold of sparsity to filter at for peaks
 #' @return nested list containing the subset data, a list of peaks, and list of
 #'   cells
+#' @examples data("subsetSchepData")
+#' data("schepPeaks")
+#' data("schepCellTypes")
+#' 
+#' outData = dataSubsetBySparsity(subsetSchepData, schepCellTypes, schepPeaks)
 #'   
 #' @export
 dataSubsetBySparsity = function(data, cell_list, peak_list, cell_cut = 0.99, peak_cut = 0.99) {

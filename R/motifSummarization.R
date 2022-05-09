@@ -11,7 +11,7 @@
 #' @param cellNames List of cellnames corresponding to the cells in scATACData
 #' @param pCutoff p-value cutoff for motifmatchr, 5e-09 by default to identify only matches with high confidence
 #' @return matrix for input to CoGAPS with summary to motifs; motifs by cells
-#' @examples \dontrun{
+#' @examples \donttest{
 #' motifSummTest = motifSummarization(motifList = motifs, scATACData = scatac, granges = peakGranges, genome = "hg19", cellNames = cells, pCutoff = 5e-09)
 #' }
 #' @export 

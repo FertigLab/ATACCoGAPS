@@ -47,6 +47,11 @@ patternAccessibleMotifs = function(pattern, generanges, motifs, genome,
 #' @param motifsPerRegion number of top motifs to return from each peak
 #' @return motifPatternMatch: nested list of the top motif for each region for x
 #'   number of regions for each pattern
+#' @examples data(exampleMotifList)
+#' data(schepGranges)
+#' data(schepCogapsResult)
+#' 
+#' motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges, exampleMotifList, "hg19")
 #' @export
 motifPatternMatch = function(cogapsResult, generanges, motiflist,
                              genome, scoreThreshold = NULL, motifsPerRegion = 1) {
@@ -105,6 +110,13 @@ motifPatternMatch = function(cogapsResult, generanges, motiflist,
 #' @param tfData dataframe of motifs and TFs from cisBP database
 #' @return getTFs: list containing list of dataframes of tfData subset to matched TFs
 #'   and list of how many times each TF was matched to a motif/peak
+#' @examples data(exampleMotifList)
+#' data(schepGranges)
+#' data(schepCogapsResult)
+#' data(tfData)
+#' 
+#' motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges, exampleMotifList, "hg19")
+#' motifTFs = getTFs(motifsByPattern, tfData)
 #' @export
 getTFs = function(motifList, tfData) {
   #lists to iteratively record TF info for each pattern
@@ -135,6 +147,15 @@ getTFs = function(motifList, tfData) {
 #'   database (Han et al Nucleic Acid Res. 2018)
 #' @return findRegulatoryNetworks: list of TFs for which we have annotations and
 #'   the corresponding gene networks for each pattern
+#' @examples data(exampleMotifList)
+#' data(schepGranges)
+#' data(schepCogapsResult)
+#' data(tfData)
+#' 
+#' motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges, exampleMotifList, "hg19")
+#' motifTFs = getTFs(motifsByPattern, tfData)
+#' 
+#' regNets = findRegulatoryNetworks(motifTFs, ATACCoGAPS:::humanRegNets)
 #' @export
 findRegulatoryNetworks = function(TFs, networks) {
   tfOut = TFs[[1]]
@@ -153,6 +174,15 @@ findRegulatoryNetworks = function(TFs, networks) {
 #' @param TFs object of TF info returned from the getTFs function
 #' @return getTFDescriptions: list of functional annotations for all TFs in each
 #'   pattern
+#' @examples data(exampleMotifList)
+#' data(schepGranges)
+#' data(schepCogapsResult)
+#' data(tfData)
+#' 
+#' motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges, exampleMotifList, "hg19")
+#' motifTFs = getTFs(motifsByPattern, tfData)
+#' 
+#' tfDesc = getTFDescriptions(motifTFs)
 #' @export
 getTFDescriptions = function(TFs) {
   tfOut = TFs[[1]]
