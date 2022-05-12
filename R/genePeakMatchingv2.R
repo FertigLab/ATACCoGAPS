@@ -75,7 +75,8 @@ geneMatch = function(regionIndex, generanges, genome) {
 #' 
 #' library(Homo.sapiens)
 #'
-#' genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens)
+#' genes = genePatternMatch(cogapsResult = schepCogapsResult,
+#'  generanges = schepGranges, genome = Homo.sapiens)
 #' @export
 genePatternMatch = function(cogapsResult, generanges, genome, scoreThreshold = NULL) {
   

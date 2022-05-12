@@ -49,11 +49,12 @@ paths = function(patGenes, pathways, pval_cut, pAdjustMethod) {
 #' data(schepGranges)
 #' library(Homo.sapiens)
 #'
-#' genes <- genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens)
+#' genes <- genePatternMatch(cogapsResult = schepCogapsResult,
+#'  generanges = schepGranges, genome = Homo.sapiens)
 #' 
 #' library(dplyr)
-#' pathways = msigdbr::msigdbr(species = "Homo sapiens", category =
-#'                              "H") %>% dplyr::select(gs_name, gene_symbol) %>% as.data.frame()
+#' pathways = msigdbr::msigdbr(species = "Homo sapiens", category =H") %>% 
+#' dplyr::select(gs_name, gene_symbol) %>% as.data.frame()
 #'
 #' matchedPathways = pathwayMatch(genes, pathways, p_threshold = 0.001)
 #' @export

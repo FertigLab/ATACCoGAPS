@@ -17,7 +17,8 @@
 #' geneList <- c("TAL1", "IRF1")
 #' data(schepGranges)
 #' data("subsetSchepData")
-#' accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = subsetSchepData, genome = Homo.sapiens)
+#' accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges,
+#'  atacData = subsetSchepData, genome = Homo.sapiens)
 #' @export
 geneAccessibility <- function(geneList, peakGranges, atacData, genome) {
   genes <- geneRanges(genome) #uses geneRanges function from genePeakMatching.R file

@@ -19,7 +19,8 @@
 #'
 #' @return Result matrices from the fgsea function for each pattern comparison
 #' @examples \dontrun{
-#' gseaList = RNAseqTFValidation(TFMatchResult$RegulatoryNetworks, RNACoGAPS, c(1,3), c(2,7), matrix = FALSE)
+#' gseaList = RNAseqTFValidation(TFMatchResult$RegulatoryNetworks, RNACoGAPS,
+#'  c(1,3), c(2,7), matrix = FALSE)
 #' }
 #' @export
 

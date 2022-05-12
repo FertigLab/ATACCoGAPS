@@ -26,8 +26,9 @@
 #' @examples data("schepCogapsResult")
 #' data(schepGranges)
 #'
-#' motifResults = simpleMotifTFMatch(cogapsResult = schepCogapsResult, generanges = schepGranges,
-#'  organism = "Homo sapiens", genome = "hg19", motifsPerRegion = 1)
+#' motifResults = simpleMotifTFMatch(cogapsResult = schepCogapsResult,
+#'  generanges = schepGranges, organism = "Homo sapiens",
+#'  genome = "hg19", motifsPerRegion = 1)
 #' @export
 simpleMotifTFMatch = function(cogapsResult, generanges, organism,
                             genome, scoreThreshold = NULL, motifsPerRegion = 1) {
@@ -38,7 +39,7 @@ simpleMotifTFMatch = function(cogapsResult, generanges, organism,
   else if(organism == "Mus musculus") {
     networks = mouseRegNets
   }
-  else{print("Only Homo Sapiens and Mus Musculus are supported for fastMotifTFMatch. Use motifPatternMatch and downstream functions instead.", quote = F)}
+  else{print("Only Homo Sapiens and Mus Musculus are supported for fastMotifTFMatch. Use motifPatternMatch and downstream functions instead.", quote = FALSE)}
 
   jMotifs = chromVAR::getJasparMotifs(organism)
   #call motifPatternMatch

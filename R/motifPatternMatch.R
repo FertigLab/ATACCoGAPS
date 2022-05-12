@@ -51,7 +51,8 @@ patternAccessibleMotifs = function(pattern, generanges, motifs, genome,
 #' data(schepGranges)
 #' data(schepCogapsResult)
 #' 
-#' motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges, exampleMotifList, "hg19")
+#' motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges,
+#'  exampleMotifList, "hg19")
 #' @export
 motifPatternMatch = function(cogapsResult, generanges, motiflist,
                              genome, scoreThreshold = NULL, motifsPerRegion = 1) {
