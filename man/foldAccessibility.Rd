@@ -35,6 +35,8 @@ library(Homo.sapiens)
 geneList <- c("TAL1", "IRF1")
 data(schepGranges)
 binarizedData <- (subsetSchepData > 0) + 0
-accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = subsetSchepData, genome = Homo.sapiens)
-foldAccessibility(peaksAccessibility = accessiblePeaks$TAL1, cellTypeList = schepCellTypes, cellType = "K562 Erythroleukemia", binaryMatrix = binarizedData)
+accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges,
+ atacData = subsetSchepData, genome = Homo.sapiens)
+foldAccessibility(peaksAccessibility = accessiblePeaks$TAL1, cellTypeList = schepCellTypes,
+ cellType = "K562 Erythroleukemia", binaryMatrix = binarizedData)
 }

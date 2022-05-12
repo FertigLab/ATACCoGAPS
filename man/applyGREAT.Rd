@@ -40,5 +40,6 @@ PatternMarker statistic.
 data("schepCogapsResult")
 data(schepGranges)
 
-GOenrichment <- applyGREAT(cogapsResult = schepCogapsResult, granges = schepGranges, genome = "hg19")
+GOenrichment <- applyGREAT(cogapsResult = schepCogapsResult,
+ granges = schepGranges, genome = "hg19")
 }

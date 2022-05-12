@@ -36,6 +36,7 @@ summarization
 }
 \examples{
 \dontrun{
-motifSummTest = motifSummarization(motifList = motifs, scATACData = scatac, granges = peakGranges, genome = "hg19", cellNames = cells, pCutoff = 5e-09)
+motifSummTest = motifSummarization(motifList = motifs, scATACData = scatac,
+ granges = peakGranges, genome = "hg19", cellNames = cells, pCutoff = 5e-09)
 }
 }

@@ -37,5 +37,6 @@ data(schepGranges)
 
 library(Homo.sapiens)
 
-genes = genePatternMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, genome = Homo.sapiens)
+genes = genePatternMatch(cogapsResult = schepCogapsResult,
+ generanges = schepGranges, genome = Homo.sapiens)
 }

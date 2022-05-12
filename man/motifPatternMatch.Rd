@@ -83,7 +83,8 @@ data(exampleMotifList)
 data(schepGranges)
 data(schepCogapsResult)
 
-motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges, exampleMotifList, "hg19")
+motifsByPattern = motifPatternMatch(schepCogapsResult, schepGranges,
+ exampleMotifList, "hg19")
 data(exampleMotifList)
 data(schepGranges)
 data(schepCogapsResult)

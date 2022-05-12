@@ -32,5 +32,6 @@ library(Homo.sapiens)
 geneList <- c("TAL1", "IRF1")
 data(schepGranges)
 data("subsetSchepData")
-accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges, atacData = subsetSchepData, genome = Homo.sapiens)
+accessiblePeaks <- geneAccessibility(geneList = geneList, peakGranges = schepGranges,
+ atacData = subsetSchepData, genome = Homo.sapiens)
 }
