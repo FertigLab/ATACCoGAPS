@@ -45,7 +45,7 @@ paths = function(patGenes, pathways, pval_cut, pAdjustMethod) {
 #'
 #' @return List of gene overlap objects, pathways with significant overlap and
 #'   pathway names for each pattern
-#' @examples data("schepCogapsResult")
+#' @examples data(schepCogapsResult)
 #' data(schepGranges)
 #' library(Homo.sapiens)
 #'
@@ -53,7 +53,7 @@ paths = function(patGenes, pathways, pval_cut, pAdjustMethod) {
 #'  generanges = schepGranges, genome = Homo.sapiens)
 #' 
 #' library(dplyr)
-#' pathways = msigdbr::msigdbr(species = "Homo sapiens", category =H") %>% 
+#' pathways = msigdbr::msigdbr(species = "Homo sapiens", category ="H") %>% 
 #' dplyr::select(gs_name, gene_symbol) %>% as.data.frame()
 #'
 #' matchedPathways = pathwayMatch(genes, pathways, p_threshold = 0.001)

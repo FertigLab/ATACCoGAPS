@@ -17,7 +17,4 @@ schepGranges
 GRanges in the order of the peaks of the subsetSchepData object from the
 Schep et al, 2017, Nature Methods paper.
 }
-\examples{
-data(schepGranges)
-}
 \keyword{datasets}

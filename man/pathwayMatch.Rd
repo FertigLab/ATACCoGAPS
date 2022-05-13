@@ -26,3 +26,17 @@ List of gene overlap objects, pathways with significant overlap and
 Takes the result of the genePatternMatch function and finds significantly
 enriched pathways for each pattern.
 }
+\examples{
+data(schepCogapsResult)
+data(schepGranges)
+library(Homo.sapiens)
+
+genes <- genePatternMatch(cogapsResult = schepCogapsResult,
+ generanges = schepGranges, genome = Homo.sapiens)
+
+library(dplyr)
+pathways = msigdbr::msigdbr(species = "Homo sapiens", category ="H") \%>\% 
+dplyr::select(gs_name, gene_symbol) \%>\% as.data.frame()
+
+matchedPathways = pathwayMatch(genes, pathways, p_threshold = 0.001)
+}
