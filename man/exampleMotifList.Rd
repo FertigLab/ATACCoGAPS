@@ -15,4 +15,7 @@ PWMMatrixList used for examples with functions based on DNA motifs.
 Each entry contains the motif ID and the probability of each nucleotide
 at each position, as a matrix.
 }
+\examples{
+data(exampleMotifList)
+}
 \keyword{datasets}

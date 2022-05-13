@@ -16,4 +16,7 @@ tfData
 \description{
 Information on human TFs and their correpsonding DNA motifs
 }
+\examples{
+data(tfData)
+}
 \keyword{datasets}

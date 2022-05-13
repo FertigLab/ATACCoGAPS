@@ -13,4 +13,7 @@ schepCogapsResult
 \description{
 Output from applying the CoGAPS algorithm to the subsetSchepData object.
 }
+\examples{
+data(schepCogapsResult)
+}
 \keyword{datasets}

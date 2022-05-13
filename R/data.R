@@ -6,6 +6,7 @@
 #'  schepCellTypes, and schepGranges data objects.
 #'  
 #' @source \url{10.1038/nmeth.4401}
+#' @examples data(subsetSchepData)
 "subsetSchepData"
 
 #' GRanges corresponding to subsetSchepData
@@ -16,6 +17,7 @@
 #' @format GRanges of length 5036
 #' 
 #' @source \url{10.1038/nmeth.4401}
+#' @examples data(schepGranges)
 "schepGranges"
 
 #' Peaks corresponding to subsetSchepData
@@ -26,6 +28,7 @@
 #' @format Character vector of length 5036
 #' 
 #' @source \url{10.1038/nmeth.4401}
+#' @examples data(schepPeaks)
 "schepPeaks"
 
 #' Cell types corresponding to subsetSchepData
@@ -36,6 +39,7 @@
 #' @format Factor of length 600 with 12 levels
 #' 
 #' @source \url{10.1038/nmeth.4401}
+#' @examples data(schepCellTypes)
 "schepCellTypes"
 
 #' CogapsResult from the subsetSchepData object
@@ -43,6 +47,7 @@
 #' Output from applying the CoGAPS algorithm to the subsetSchepData object.
 #' 
 #' @format Large CogapsResult
+#' @examples data(schepCogapsResult)
 "schepCogapsResult"
 
 #' List of human TFs and motifs from cisBP database
@@ -52,6 +57,7 @@
 #' @format Data frame with 95413 rows and 28 columns.
 #' 
 #' @source \url{http://cisbp.ccbr.utoronto.ca/}
+#' @examples data(tfData)
 "tfData"
 
 
@@ -62,7 +68,7 @@
 #' at each position, as a matrix.
 #' 
 #' @format PWMMatrixList of length 100
-#' 
+#' @examples data(exampleMotifList)
 "exampleMotifList"
 
 

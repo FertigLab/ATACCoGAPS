@@ -17,4 +17,7 @@ subsetSchepData
 \description{
 Subset from the Schep et al data, used for examples in this package.
 }
+\examples{
+data(subsetSchepData)
+}
 \keyword{datasets}

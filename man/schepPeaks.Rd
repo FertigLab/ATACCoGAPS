@@ -17,4 +17,7 @@ schepPeaks
 Character vector of peaks in the order of the peaks of the subsetSchepData object from the
 Schep et al, 2017, Nature Methods paper.
 }
+\examples{
+data(schepPeaks)
+}
 \keyword{datasets}

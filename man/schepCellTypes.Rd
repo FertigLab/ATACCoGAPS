@@ -17,4 +17,7 @@ schepCellTypes
 Factor of cell types in the order of the subsetSchepData object from the
 Schep et al, 2017, Nature Methods paper.
 }
+\examples{
+data(schepCellTypes)
+}
 \keyword{datasets}
