@@ -18,52 +18,45 @@
 #' outData = dataSubsetBySparsity(subsetSchepData, schepCellTypes, schepPeaks)
 #'   
 #' @export
-dataSubsetBySparsity = function(data, cell_list, peak_list, cell_cut = 0.99, peak_cut = 0.99) {
+dataSubsetBySparsity <- function(data, cell_list, peak_list, cell_cut = 0.99, peak_cut = 0.99) {
 
   #find the sparsity for each peak in the data
-  peaks_sparsity = apply(data, 1, function(x){sum(x==0)/length(x)})
-
-  #print the number of peaks being filtered from the data
-  print(paste("Peaks to be filtered:", sum(peaks_sparsity > peak_cut)), quote = FALSE)
-
+  peaks_sparsity <- apply(data, 1, function(x){sum(x==0)/length(x)})
 
   #find the sparsity for each cell in the data
-  cells_sparsity = apply(data, 2, function(x){sum(x==0)/length(x)})
-
-  #print the number of cells being filtered from the data
-  print(paste("Cells to be filtered:", sum(cells_sparsity > cell_cut)), quote = FALSE)
+  cells_sparsity <- apply(data, 2, function(x){sum(x==0)/length(x)})
 
   #create new list of peaks that will be kept in output data
-  peaks_to_remove = which(peaks_sparsity > peak_cut)
+  peaks_to_remove <- which(peaks_sparsity > peak_cut)
   if(length(peaks_to_remove) == 0) {
-    peaks_sub = peak_list
+    peaks_sub <- peak_list
   }
   else{
-  peaks_sub = peak_list[-peaks_to_remove]
+  peaks_sub <- peak_list[-peaks_to_remove]
   }
 
   #create list of celltypes that will be kept in subset data
-  cells_to_remove = which(cells_sparsity > cell_cut)
+  cells_to_remove <- which(cells_sparsity > cell_cut)
   if(length(cells_to_remove) == 0){
-    celltypes_sub = cell_list
+    celltypes_sub <- cell_list
   }
   else{
-    celltypes_sub = cell_list[-cells_to_remove]
+    celltypes_sub <- cell_list[-cells_to_remove]
   }
-  celltypes_list_sub = as.character(celltypes_sub)
+  celltypes_list_sub <- as.character(celltypes_sub)
 
   #subset the input data
   if(length(cells_to_remove) == 0 & length(peaks_to_remove) == 0) {
-    data_sub = data
+    data_sub <- data
   }
   else if(length(cells_to_remove) == 0) {
-    data_sub = data[-peaks_to_remove,]
+    data_sub <- data[-peaks_to_remove,]
   }
   else if(length(peaks_to_remove) == 0) {
-    data_sub = data[,-cells_to_remove]
+    data_sub <- data[,-cells_to_remove]
   }
   else{
-    data_sub = data[-peaks_to_remove, -cells_to_remove]
+    data_sub <- data[-peaks_to_remove, -cells_to_remove]
   }
 
   return(list(subset_data = data_sub, subset_cells = celltypes_list_sub,

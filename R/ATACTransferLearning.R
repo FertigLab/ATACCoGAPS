@@ -16,14 +16,14 @@
 #' @export
 
 
-ATACTransferLearning = function(newData, CoGAPSResult, originalPeaks,
+ATACTransferLearning <- function(newData, CoGAPSResult, originalPeaks,
                                 originalGranges, newGranges) {
 
-  olaps = as.matrix(GenomicRanges::findOverlaps(originalGranges, newGranges))
-  olap_peaks=originalPeaks[olaps[,1]]
-  newDataSub = newData[olaps[,2],]
+  olaps <- as.matrix(GenomicRanges::findOverlaps(originalGranges, newGranges))
+  olap_peaks<-originalPeaks[olaps[,1]]
+  newDataSub <- newData[olaps[,2],]
 
-  pR = projectR::projectR(newDataSub, CoGAPSResult, olap_peaks, originalPeaks,
+  pR <- projectR::projectR(newDataSub, CoGAPSResult, olap_peaks, originalPeaks,
                           full = TRUE)
 
   return(pR)

@@ -11,7 +11,6 @@
 #'   random vector of colors is generated
 #' @param order should the data be ordered by the celltype classifier? TRUE by
 #'   default
-#' @param seed random seed to generate colors if colColors is NULL
 #' @param ... additional arguments to the heatmap.2 function from the gplots
 #'   package
 #' @return A plot of the peaks overlapping with a particular gene of interest
@@ -24,48 +23,47 @@
 #'  peakGranges = schepGranges, atacData = subsetSchepData, genome = Homo.sapiens)
 #' heatmapGeneAccessibility(genePeaks = accessiblePeaks$EGR1, celltypes = schepCellTypes)
 #' @export
-heatmapGeneAccessibility <- function(genePeaks, celltypes, colColors = NULL, order = TRUE, seed = 42, ...) {
+heatmapGeneAccessibility <- function(genePeaks, celltypes, colColors = NULL, order = TRUE, ...) {
   
   if(is.list(genePeaks)) {
     stop("Only one element of the list returned by the geneAccessibility function should be input as the genePeaks parameter")
   }
   
-  celltypes = as.factor(celltypes)
+  celltypes <- as.factor(celltypes)
   
   if(order == TRUE) {
     #order the data by celltype
-    genePeaks = rbind(genePeaks, celltypes)
-    ind = nrow(genePeaks)
-    genePeaks = genePeaks[,order(genePeaks[ind,])]
-    genePeaks = genePeaks[-c(ind),]
+    genePeaks <- rbind(genePeaks, celltypes)
+    ind <- nrow(genePeaks)
+    genePeaks <- genePeaks[,order(genePeaks[ind,])]
+    genePeaks <- genePeaks[-c(ind),]
   }
   
   if(is.null(colColors)){
     #produce vectors of colors for visualizing celltypes in the heatmap
-    set.seed(seed)
-    colsgen = rainbow(length(levels(celltypes)))
-    colsgen = gtools::permute(colsgen)
+    colsgen <- rainbow(length(levels(celltypes)))
+    colsgen <- gtools::permute(colsgen)
     if(order == TRUE) {
-      colColors = colsgen[as.numeric(sort(celltypes))]
+      colColors <- colsgen[as.numeric(sort(celltypes))]
     }
     else{
-      colColors = colsgen[as.numeric(celltypes)]
+      colColors <- colsgen[as.numeric(celltypes)]
     }
   }
   
   else{
     if(order == TRUE) {
-      colColors = colColors[as.numeric(sort(celltypes))]
+      colColors <- colColors[as.numeric(sort(celltypes))]
     }
     else{
-      colColors = colColors[as.numeric(celltypes)]
+      colColors <- colColors[as.numeric(celltypes)]
     }
   }
   
   if(is.null(nrow(genePeaks))) {
     warning("There is only one peak matched to this gene, adding a row of zeroes so the peak can be plotted using a heatmap.")
     zeroRow <- rep(0, length(genePeaks))
-    genePeaks = rbind(genePeaks, zeroRow)
+    genePeaks <- rbind(genePeaks, zeroRow)
   }
   
   if(order == TRUE) {

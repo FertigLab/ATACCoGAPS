@@ -17,44 +17,44 @@
 #' }
 #' @export 
 
-motifSummarization = function(motifList, scATACData, granges, genome,
+motifSummarization <- function(motifList, scATACData, granges, genome,
                               cellNames, pCutoff = 5e-09) {
   #call motifmatchr to find DNA motifs in peak regions
-  matchedmotifs = motifmatchr::matchMotifs(motifList, granges, 
+  matchedmotifs <- motifmatchr::matchMotifs(motifList, granges, 
                                            genome = genome, out = "scores",
                                            p.cutoff = pCutoff)
-  region_motif_matches = motifmatchr::motifMatches(matchedmotifs)
+  region_motif_matches <- motifmatchr::motifMatches(matchedmotifs)
   
   #finding motifs that are never matched
-  unmatched=apply(region_motif_matches, 2, function(x) {sum(x)==0})
-  unmatchedMotifs = which(unmatched == TRUE)
+  unmatched<-apply(region_motif_matches, 2, function(x) {sum(x)==0})
+  unmatchedMotifs <- which(unmatched == TRUE)
   
   #finding indices of motifmatches in the data
-  mminds = apply(region_motif_matches, 2, function(x)
+  mminds <- apply(region_motif_matches, 2, function(x)
   {
-    motifmatches = which(x ==TRUE)
+    motifmatches <- which(x ==TRUE)
     return(list(motifmatches))
   })
   
   #preallocate the matrix
-  motif_scATACData_matrix = matrix(nrow = length(mminds),
+  motif_scATACData_matrix <- matrix(nrow = length(mminds),
                                    ncol = ncol(scATACData))
   #aggregate motif matches in individual cells to produce motif x cells matrix
   for(i in seq_along(mminds)) {
     for(j in seq(ncol(scATACData))){
-      chrRegions = scATACData[mminds[[i]][[1]], j]
-      readsum = sum(chrRegions)
-      motif_scATACData_matrix[i, j] = readsum
+      chrRegions <- scATACData[mminds[[i]][[1]], j]
+      readsum <- sum(chrRegions)
+      motif_scATACData_matrix[i, j] <- readsum
     }
   }
   
   #name rows and columns
-  colnames(motif_scATACData_matrix) = cellNames
-  rownames(motif_scATACData_matrix) = TFBSTools::ID(motifList)
+  colnames(motif_scATACData_matrix) <- cellNames
+  rownames(motif_scATACData_matrix) <- TFBSTools::ID(motifList)
   
   #remove motifs that are never matched
   if(length(unmatchedMotifs) < 0) {
-    motif_scATACData_matrix = motif_scATACData_matrix[-unmatchedMotifs,]
+    motif_scATACData_matrix <- motif_scATACData_matrix[-unmatchedMotifs,]
   }
   
   return(motif_scATACData_matrix)

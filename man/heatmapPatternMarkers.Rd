@@ -37,8 +37,6 @@ generated randomly}
 
 \item{patterns}{which patterns should be plotted, if NULL all will be plotted}
 
-\item{seed}{random seed for generating colors for plot; for reproducibility}
-
 \item{order}{option whether to sort the data by celltype before plotting,
 TRUE by default}
 

@@ -27,45 +27,43 @@ applyGREAT <- function(cogapsResult, granges, genome,
                        scoreThreshold = NULL, GREATCategory = "GO") {
   
   #get PatternMarker peak indices
-  patMarkers = CoGAPS::patternMarkers(cogapsResult)
+  patMarkers <- CoGAPS::patternMarkers(cogapsResult)
   if(is.null(scoreThreshold)){
-    peaks = patMarkers$PatternMarkers
-    nPeaks = lapply(peaks, length)
-    PMRanks = patMarkers$PatternMarkerRanks
-    regionPatList = vector(mode = "list", length = ncol(PMRanks))
+    peaks <- patMarkers$PatternMarkers
+    nPeaks <- lapply(peaks, length)
+    PMRanks <- patMarkers$PatternMarkerRanks
+    regionPatList <- vector(mode = "list", length = ncol(PMRanks))
     for(i in seq(ncol(PMRanks))) {
-      topPeaksPat = which(PMRanks[,i] %in% seq(nPeaks[[i]]))
-      regionPatList[[i]] = topPeaksPat
+      topPeaksPat <- which(PMRanks[,i] %in% seq(nPeaks[[i]]))
+      regionPatList[[i]] <- topPeaksPat
     }
   }
   else{
-    patScores = as.data.frame(patMarkers$PatternMarkerScores)
-    chr_regions = rownames(patScores)
-    regionPatList = vector(mode=  "list", length = ncol(patScores))
+    patScores <- as.data.frame(patMarkers$PatternMarkerScores)
+    chr_regions <- rownames(patScores)
+    regionPatList <- vector(mode=  "list", length = ncol(patScores))
     for(i in seq(ncol(patScores))) {
-      topPeaksPat = which(patScores[,i] < scoreThreshold)
-      regionPatList[[i]] = topPeaksPat
+      topPeaksPat <- which(patScores[,i] < scoreThreshold)
+      regionPatList[[i]] <- topPeaksPat
     }
   }
   
   
-  #print number of peaks used based on patternMarker score threshold
-  numPeaks = unlist(lapply(regionPatList, length))
-  names(numPeaks) = lapply(seq(length(regionPatList)),
+  #number of peaks used based on patternMarker score threshold
+  numPeaks <- unlist(lapply(regionPatList, length))
+  names(numPeaks) <- lapply(seq(length(regionPatList)),
                            function(x) {paste("Pattern", x)})
-  print("Number of peaks used for each pattern:", quote = FALSE)
-  print(numPeaks)
   
   #call GREAT and get enrichment for GO terms
-  GREATResults = vector("list", length(regionPatList))
+  GREATResults <- vector("list", length(regionPatList))
   for(i in seq(length(regionPatList))) {
-    patRanges = granges[regionPatList[[i]]]
+    patRanges <- granges[regionPatList[[i]]]
     
-    greatJob = rGREAT::submitGreatJob(gr = patRanges, species = genome,
+    greatJob <- rGREAT::submitGreatJob(gr = patRanges, species = genome,
                                       request_interval = 1)
-    tbl = rGREAT::getEnrichmentTables(greatJob, category = GREATCategory)
+    tbl <- rGREAT::getEnrichmentTables(greatJob, category = GREATCategory)
     
-    GREATResults[[i]] = tbl
+    GREATResults[[i]] <- tbl
   }
   
   return(GREATResults)

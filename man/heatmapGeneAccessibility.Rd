@@ -9,7 +9,6 @@ heatmapGeneAccessibility(
   celltypes,
   colColors = NULL,
   order = TRUE,
-  seed = 42,
   ...
 )
 }
@@ -25,8 +24,6 @@ random vector of colors is generated}
 
 \item{order}{should the data be ordered by the celltype classifier? TRUE by
 default}
-
-\item{seed}{random seed to generate colors if colColors is NULL}
 
 \item{...}{additional arguments to the heatmap.2 function from the gplots
 package}

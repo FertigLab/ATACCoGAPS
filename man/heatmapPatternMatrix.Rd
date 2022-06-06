@@ -12,7 +12,6 @@ heatmapPatternMatrix(
   patterns = NULL,
   matrix = FALSE,
   rowColors = NULL,
-  seed = 42,
   ...
 )
 }
@@ -37,8 +36,6 @@ patterns are plotted}
 if true it is interpreted as the pattern matrix being input directly}
 
 \item{rowColors}{vector of colors to plot along patterns, if NULL generated automatically}
-
-\item{seed}{random seed to generate colors; for reproducibility}
 
 \item{...}{additional arguments to the heatmap.2 function}
 }

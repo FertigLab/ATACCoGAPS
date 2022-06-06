@@ -20,7 +20,6 @@
 #' @param rowColors row-wise colors for distinguishing patterns. If NULL will be
 #'   generated randomly
 #' @param patterns which patterns should be plotted, if NULL all will be plotted
-#' @param seed random seed for generating colors for plot; for reproducibility
 #' @param order option whether to sort the data by celltype before plotting,
 #'   TRUE by default
 #' @param ... additional arguments to the heatmap.2 function
@@ -38,71 +37,70 @@ heatmapPatternMarkers = function(cgaps_result, atac_data, celltypes, numregions 
                                  seed = 42, order = TRUE,...) {
 
   #convert atac read data to binary matrix
-  binary_atac = (atac_data > 0) + 0 #this line works because R represents TRUE/FALSE as 1/0
+  binary_atac <- (atac_data > 0) + 0 #this line works because R represents TRUE/FALSE as 1/0
 
   #get regions corresponding to most elevated PatternMarker results
-  patMarkers = CoGAPS::patternMarkers(cgaps_result)
-  patRanks = as.data.frame(patMarkers[2])
-  chr_regions = rownames(patRanks)
-  regionPatList = vector(mode=  "list", length = ncol(patRanks))
+  patMarkers <- CoGAPS::patternMarkers(cgaps_result)
+  patRanks <- as.data.frame(patMarkers[2])
+  chr_regions <- rownames(patRanks)
+  regionPatList <- vector(mode=  "list", length = ncol(patRanks))
   for(i in seq(ncol(patRanks))) {
-    topPeaksPat = order(patRanks[,i])[seq(numregions)]
-    regionPatList[[i]] = topPeaksPat
+    topPeaksPat <- order(patRanks[,i])[seq(numregions)]
+    regionPatList[[i]] <- topPeaksPat
   }
   
   if(is.null(patterns)){
-    patterns = seq_along(regionPatList)
+    patterns <- seq_along(regionPatList)
   }
   #subset the regions most differentially accessible for each pattern from the original data
-  allPatSubset = data.frame()
+  allPatSubset <- data.frame()
   for(i in patterns) {
-    temppatsub = as.matrix(binary_atac[unlist(regionPatList[i]),])
-    allPatSubset = rbind(allPatSubset, temppatsub)
+    temppatsub <- as.matrix(binary_atac[unlist(regionPatList[i]),])
+    allPatSubset <- rbind(allPatSubset, temppatsub)
   }
 
-  allPatSubset = as.matrix(allPatSubset)
+  allPatSubset <- as.matrix(allPatSubset)
 
   if(is.null(rowColors)){
     #produce vectors of colors for visualizing patterns in the heatmap
-    rowColors = rainbow(ncol(patRanks))
+    rowColors <- rainbow(ncol(patRanks))
   }
-  rowCols = character(length(patterns)*numregions)
-  j=1
+  rowCols <- character(length(patterns)*numregions)
+  j<-1
   for(i in patterns){
-    color = rep(rowColors[i], numregions)
-    rowCols[j:(j+numregions-1)] = color
-    j=j+numregions
+    color <- rep(rowColors[i], numregions)
+    rowCols[j:(j+numregions-1)] <- color
+    j<-j+numregions
   }
 
-  celltypes = as.factor(celltypes)
+  celltypes <- as.factor(celltypes)
 
   if(order == TRUE) {
   #order the data by celltype
-  allPatSubset = rbind(allPatSubset, celltypes)
-  ind = (numregions*length(patterns))+1
-  allPatSubset = allPatSubset[,order(allPatSubset[ind,])]
-  allPatSubset = allPatSubset[-c(ind),]
+  allPatSubset <- rbind(allPatSubset, celltypes)
+  ind <- (numregions*length(patterns))+1
+  allPatSubset <- allPatSubset[,order(allPatSubset[ind,])]
+  allPatSubset <- allPatSubset[-c(ind),]
   }
 
   if(is.null(colColors)){
   #produce vectors of colors for visualizing celltypes in the heatmap
-  set.seed(seed)
-  colsgen = rainbow(length(levels(celltypes)))
-  colsgen = gtools::permute(colsgen)
+  colsgen <- rainbow(length(levels(celltypes)))
+  colsgen <- gtools::permute(colsgen)
   if(order == TRUE) {
-  colColors = colsgen[as.numeric(sort(celltypes))]
+  colColors <- colsgen[as.numeric(sort(celltypes))]
   }
   else{
-    colColors = colsgen[as.numeric(celltypes)]
+    colColors <- colsgen[as.numeric(celltypes)]
   }
   }
 
   else{
     if(order == TRUE) {
-      colColors = colColors[as.numeric(sort(celltypes))]
+      colColors <- colColors[as.numeric(sort(celltypes))]
     }
     else{
-      colColors = colColors[as.numeric(celltypes)]
+      colColors <- colColors[as.numeric(celltypes)]
     }
   }
 

@@ -15,21 +15,21 @@
 #'
 #' schepGranges = peaksToGRanges(schepPeaks, sep = "-")
 #' @export
-peaksToGRanges = function(region_list, sep) {
+peaksToGRanges <- function(region_list, sep) {
 
   #split strings into chr, start location, and end location
-  splitNames = unlist(lapply(region_list, stringr::str_split, stringr::coll(sep)))
-  chrs = splitNames[seq(1,length(splitNames), by = 3)]
-  starts = splitNames[seq(2,length(splitNames), by = 3)]
-  ends = splitNames[seq(3,length(splitNames), by = 3)]
+  splitNames <- unlist(lapply(region_list, stringr::str_split, stringr::coll(sep)))
+  chrs <- splitNames[seq(1,length(splitNames), by = 3)]
+  starts <- splitNames[seq(2,length(splitNames), by = 3)]
+  ends <- splitNames[seq(3,length(splitNames), by = 3)]
 
   #convert starting and ending location info to numeric values
-  starts = as.numeric(starts)
-  ends = as.numeric(ends)
+  starts <- as.numeric(starts)
+  ends <- as.numeric(ends)
 
   #build GRanges by creating dataframe to supply to the makeGRangesFromDataFrame function
-  df = data.frame(chrs, starts, ends)
-  granges = GenomicRanges::makeGRangesFromDataFrame(df, ignore.strand = TRUE, seqnames.field = "chrs",
+  df <- data.frame(chrs, starts, ends)
+  granges <- GenomicRanges::makeGRangesFromDataFrame(df, ignore.strand = TRUE, seqnames.field = "chrs",
                                                     start.field = "starts",
                                                     end.field = "ends")
 

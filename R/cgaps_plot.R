@@ -17,7 +17,6 @@
 #'   patterns are plotted
 #' @param matrix if false cgaps_result is interpreted as a CoGAPSResult object,
 #'   if true it is interpreted as the pattern matrix
-#' @param seed random seed to generate colors; for reproducibility
 #' @param ... addition arguments to plot function
 #' @return Series of plots of pattern matrix patterns colored by cell
 #'   classifications
@@ -27,33 +26,32 @@
 #' cgapsPlot(schepCogapsResult, schepCellTypes)
 #' @export
 
-cgapsPlot = function(cgaps_result, sample.classifier, cols = NULL, sort = TRUE,
-                     patterns = NULL, matrix = FALSE, seed = 42, ...){
+cgapsPlot <- function(cgaps_result, sample.classifier, cols = NULL, sort = TRUE,
+                     patterns = NULL, matrix = FALSE, ...){
 
   #if inputting the pattern matrix rather than full cogaps object
   if(matrix == TRUE) {
-    samplePatterns = cgaps_result
+    samplePatterns <- cgaps_result
   }
   else{
   #get the pattern matrix from the cogaps result
-  samplePatterns = CoGAPS::getSampleFactors(cgaps_result)
+  samplePatterns <- CoGAPS::getSampleFactors(cgaps_result)
   }
   #get the number of cell classifications to be plotted
-  cellnum = length(levels(sample.classifier))
+  cellnum <- length(levels(sample.classifier))
 
 
 
   #if no color vector is input generate a random list of colors to plot by
   if(is.null(cols)){
-    set.seed(seed)
-    cols = rainbow(cellnum)
-    cols = gtools::permute(cols)
+    cols <- rainbow(cellnum)
+    cols <- gtools::permute(cols)
   }
   #if the desired patterns to plot is not input, find the total number of patterns
   #to plot all patterns
   if(is.null(patterns)){
-    nPatterns = ncol(samplePatterns)
-    patterns = seq_len(nPatterns)
+    nPatterns <- ncol(samplePatterns)
+    patterns <- seq_len(nPatterns)
   }
 
   #sort all samples so samples of the same factor level are adjacent in the plot
@@ -65,11 +63,11 @@ cgapsPlot = function(cgaps_result, sample.classifier, cols = NULL, sort = TRUE,
     par(oma=c(0, 0, 0, 5))
 
     for(i in patterns) {
-      pattern = samplePatterns[,i]
-      sorted_pat = pattern[order(sample.classifier)]
+      pattern <- samplePatterns[,i]
+      sorted_pat <- pattern[order(sample.classifier)]
 
     #loop through each column (pattern) in the pattern matrix
-      plotname = paste("Pattern", i)
+      plotname <- paste("Pattern", i)
 
       #plot the pattern, with legend outside of the graphing region
       plot(sorted_pat, col =cols[as.numeric(sample.classifier[order(sample.classifier)])],
@@ -87,8 +85,8 @@ cgapsPlot = function(cgaps_result, sample.classifier, cols = NULL, sort = TRUE,
 
     #loop through each column (pattern) in the pattern matrix
     for(i in patterns) {
-      pattern = samplePatterns[,i]
-      plotname = paste("Pattern", i)
+      pattern <- samplePatterns[,i]
+      plotname <- paste("Pattern", i)
       #plot the pattern, with legend outside of the graphing region
       plot(pattern, col =cols[as.numeric(sample.classifier)], main = plotname, ...)
       legend(par('usr')[2], par('usr')[4], bty='n', xpd=NA,

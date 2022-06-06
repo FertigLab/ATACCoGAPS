@@ -10,8 +10,20 @@ editor_options:
   chunk_output_type: console
 ---
 
+## Introduction
+Coordinated Gene Association in Pattern Sets (CoGAPS) is a technique for latent space learning. CoGAPS is a member of the Nonnegative Matrix Factorization (NMF) class of algorithms. NMFs factorize a data matrix into two related matrices containing gene weights, the Amplitude (A) matrix, and sample weights, the Pattern (P) Matrix. Each column of A or row of P defines a feature and together this set of features defines the latent space among features and samples, respectively. In NMF, the values of the elements in the A and P matrices are constrained to be greater than or equal to zero. This constraint simultaneously reflects the non-negative nature of molecular data and enforces the additive nature of the resulting feature dimensions, generating solutions that are biologically intuitive to interpret (Seung and Lee (1999)).
+
+This package extends CoGAPS for usage with scATACseq data, allowing for summarization to genomic peaks or motifs as features for input into CoGAPS. A count matrix - peaks or motifs by cells is used as input, yielding patterns of accessibility that distinguish biological variation between cells.
 
 
+## Installation
+```{r, eval = FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("ATACCoGAPS")
+```
+
+## Package Overview
 ```{r, message = FALSE}
 library(ATACCoGAPS)
 ```
@@ -93,7 +105,7 @@ heatmapPatternMarkers(cgaps_result = schepCogapsResult, atac_data = subsetSchepD
 
 
 
-## Pathway Based Analysis
+# Pathway Based Analysis
 
 To make use of these pttern marker peaks, one option is to try to find genes that fall within these peaks and determine whether the accessibility of certain groups of genes suggests differential pathway activation. 
 ```{r, message = FALSE}
@@ -122,11 +134,11 @@ Several patterns do not return Hallmark pathways at this level of significance, 
 
 
 
-## Motif/Transcription Factor Based Analysis
+# Motif/Transcription Factor Based Analysis
 
 The other way we can use pattern marker peak information is to match to DNA motifs and known Transcription Factor binding at those motifs.
 ```{r}
-motifResults = simpleMotifTFMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", motifsPerRegion = 1)
+motifResults <- simpleMotifTFMatch(cogapsResult = schepCogapsResult, generanges = schepGranges, organism = "Homo sapiens", genome = "hg19", motifsPerRegion = 1)
 
 ```
 
@@ -150,7 +162,7 @@ foldAccessibility(peaksAccessibility = EGR1peaks$EGR1, cellTypeList = schepCellT
 EGR1 is 1.42 times more accessible than average in Monocytes
 
 
-# Session Info
+## Session Info
 
 ```{r, echo = FALSE}
 sessionInfo()

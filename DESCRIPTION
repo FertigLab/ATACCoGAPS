@@ -1,6 +1,6 @@
 Package: ATACCoGAPS
 Title: Analysis Tools for scATACseq Data with CoGAPS
-Version: 0.99.10
+Version: 0.99.11
 Authors@R: 
     person(given = "Rossin",
            family = "Erbe",
@@ -10,7 +10,7 @@ Authors@R:
 Description: Provides tools for running the CoGAPS algorithm (Fertig et al, 2010) on single-cell ATAC sequencing data and analysis of the results. Can be used to perform analyses at the level of genes, motifs, TFs, or pathways. Additionally provides tools for transfer learning and data integration with single-cell RNA sequencing data.
 License: Artistic-2.0
 Depends:
-  R (>= 3.5.0),
+  R (>= 4.2.0),
   CoGAPS (>= 3.5.13)
 Imports:
     gtools,
@@ -34,10 +34,12 @@ Imports:
     BSgenome.Mmusculus.UCSC.mm10,
     stringr,
     dplyr
-biocViews: Software, ResearchField, Epigenetics, SingleCell
+biocViews: Software, ResearchField, Epigenetics, SingleCell, Transcription, Bayesian, Clustering, DimensionReduction
 BiocType: Software
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.0
 Encoding: UTF-8
 Suggests: 
-    knitr
+    knitr,
+    viridis
+BugReports: https://github.com/FertigLab/ATACCoGAPS/issues
 VignetteBuilder: knitr

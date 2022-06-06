@@ -30,56 +30,56 @@
 #'  generanges = schepGranges, organism = "Homo sapiens",
 #'  genome = "hg19", motifsPerRegion = 1)
 #' @export
-simpleMotifTFMatch = function(cogapsResult, generanges, organism,
+simpleMotifTFMatch <- function(cogapsResult, generanges, organism,
                             genome, scoreThreshold = NULL, motifsPerRegion = 1) {
 
   if(organism == "Homo sapiens") {
-    networks = humanRegNets
+    networks <- humanRegNets
   }
   else if(organism == "Mus musculus") {
-    networks = mouseRegNets
+    networks <- mouseRegNets
   }
-  else{print("Only Homo Sapiens and Mus Musculus are supported for fastMotifTFMatch. Use motifPatternMatch and downstream functions instead.", quote = FALSE)}
+  else{stop("Only Homo Sapiens and Mus Musculus are supported for fastMotifTFMatch. Use motifPatternMatch and downstream functions instead.")}
 
-  jMotifs = chromVAR::getJasparMotifs(organism)
+  jMotifs <- chromVAR::getJasparMotifs(organism)
   #call motifPatternMatch
-  patternJMotifs = motifPatternMatch(cogapsResult, generanges, jMotifs,
+  patternJMotifs <- motifPatternMatch(cogapsResult, generanges, jMotifs,
                                      genome, scoreThreshold, motifsPerRegion)
   #make lists of all relevant info to return
-  tfNameList = vector("list", length(patternJMotifs))
-  motifNameList = vector("list", length(patternJMotifs))
+  tfNameList <- vector("list", length(patternJMotifs))
+  motifNameList <- vector("list", length(patternJMotifs))
   for(i in seq_along(patternJMotifs)) {
-    motifNames = names(unlist(patternJMotifs[[i]]))
-    splitNames = unlist(lapply(motifNames, stringr::str_split, "_"))
-    tfNames = splitNames[which(c(1:length(splitNames))%%2==0)]
-    motifNames = splitNames[which(c(1:length(splitNames))%%2==1)]
-    tfNameList[[i]] = tfNames
-    motifNameList[[i]] = motifNames
+    motifNames <- names(unlist(patternJMotifs[[i]]))
+    splitNames <- unlist(lapply(motifNames, stringr::str_split, "_"))
+    tfNames <- splitNames[which(c(seq_along(splitNames))%%2==0)]
+    motifNames <- splitNames[which(c(seq_along(splitNames))%%2==1)]
+    tfNameList[[i]] <- tfNames
+    motifNameList[[i]] <- motifNames
   }
 
-  summs = vector("list", length(tfNameList))
+  summs <- vector("list", length(tfNameList))
   for(i in seq_along(tfNameList)) {
-    patTFs = as.factor(tfNameList[[i]])
-    summs[[i]]=summary(patTFs)
+    patTFs <- as.factor(tfNameList[[i]])
+    summs[[i]]<-summary(patTFs)
   }
 
-  summs= lapply(summs, sort, decreasing = TRUE)
+  summs<- lapply(summs, sort, decreasing = TRUE)
 
-  regNetList = vector("list", length(tfNameList))
+  regNetList <- vector("list", length(tfNameList))
   for(i in seq_along(tfNameList)) {
-    patList=networks[which(names(networks) %in% tfNameList[[i]])]
-    regNetList[[i]] = patList
+    patList<-networks[which(names(networks) %in% tfNameList[[i]])]
+    regNetList[[i]] <- patList
   }
 
-  geneDescriptionList = vector("list", length(patternJMotifs))
+  geneDescriptionList <- vector("list", length(patternJMotifs))
   for(i in seq_along(tfNameList)) {
-    patAnn = humanGeneAnnotations[which(humanGeneAnnotations$Symbol %in% tfNameList[[i]]), 3:4]#make this create cleaner object
-    geneDescriptionList[[i]] = patAnn
+    patAnn <- humanGeneAnnotations[which(humanGeneAnnotations$Symbol %in% tfNameList[[i]]), 3:4]#make this create cleaner object
+    geneDescriptionList[[i]] <- patAnn
   }
 
-  return(list(tfNames = tfNameList, motifNames = motifNameList,
-              regulatoryNetworks = regNetList,
-              tfDescriptions = geneDescriptionList, tfMatchSummary = summs,
-              downloadedMotifs = jMotifs))
+  return(list(tfNames <- tfNameList, motifNames = motifNameList,
+              regulatoryNetworks <- regNetList,
+              tfDescriptions <- geneDescriptionList, tfMatchSummary = summs,
+              downloadedMotifs <- jMotifs))
 
 }

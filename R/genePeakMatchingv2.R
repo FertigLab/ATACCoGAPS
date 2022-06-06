@@ -1,52 +1,52 @@
 #function to produce the gene objects for comparison to the genomic ranges
 #from the data
 #txdb = organism TxDb with gene symbols
-geneRanges = function(txdb) {
+geneRanges <- function(txdb) {
   #get granges with gene symmbol metadata
-  g = GenomicFeatures::genes(txdb, columns="SYMBOL")
-  col = GenomicRanges::mcols(g)[["SYMBOL"]]
+  g <- GenomicFeatures::genes(txdb, columns="SYMBOL")
+  col <- GenomicRanges::mcols(g)[["SYMBOL"]]
   #create GRanges without metadata to make gene symbols character vector
-  genes = GenomicRanges::granges(g)[rep(seq_along(g), IRanges::elementNROWS(col))]
-  GenomicRanges::mcols(genes)[["SYMBOL"]] = as.character(unlist(col))
+  genes <- GenomicRanges::granges(g)[rep(seq_along(g), IRanges::elementNROWS(col))]
+  GenomicRanges::mcols(genes)[["SYMBOL"]] <- as.character(unlist(col))
   genes
 }
 
 #function to find genes within the top genomic regions
-findOverlap = function(query, subject) {
+findOverlap <- function(query, subject) {
   #find the overlaps between the GRanges containing peak regions and the GRanges
   #of known genes
-  olaps = GenomicRanges::findOverlaps(query, subject, ignore.strand = TRUE)
+  olaps <- GenomicRanges::findOverlaps(query, subject, ignore.strand = TRUE)
   #get symbols
-  symbols = GenomicRanges::mcols(query)[["SYMBOL"]][queryHits(olaps)]
+  symbols <- GenomicRanges::mcols(query)[["SYMBOL"]][queryHits(olaps)]
 
   return(symbols)
 }
 
 #function that matches genes for one pattern
-geneMatch = function(regionIndex, generanges, genome) {
+geneMatch <- function(regionIndex, generanges, genome) {
   
   #get the specific top ranges needed and concatenate into one GRanges object
-  patRanges = generanges[regionIndex]
+  patRanges <- generanges[regionIndex]
 
   #get gene ranges for all genes in the genome
-  gns = geneRanges(genome)
+  gns <- geneRanges(genome)
   
   #get overlaps with genes
-  patGenes = findOverlap(gns, patRanges)
+  patGenes <- findOverlap(gns, patRanges)
   
   #get promoters
-  prms = GenomicFeatures::promoters(GenomicFeatures::genes(genome, columns = "SYMBOL"),
+  prms <- GenomicFeatures::promoters(GenomicFeatures::genes(genome, columns = "SYMBOL"),
             upstream = 1500, downstream = 500)
   
   #overlaps with promoters
-  patPromoters = findOverlap(prms, patRanges)
-  patPromoters = unlist(patPromoters)
+  patPromoters <- findOverlap(prms, patRanges)
+  patPromoters <- unlist(patPromoters)
   
   #combine lists of genes with exonic or intronic overlap with a PatternMArker peak
   #to those with promoter overlap with a peak
-  patOvGenes = c(patGenes, patPromoters)
+  patOvGenes <- c(patGenes, patPromoters)
   #filter duplicate genes
-  patOvGenes = patOvGenes[-which(duplicated(patOvGenes))]
+  patOvGenes <- patOvGenes[-which(duplicated(patOvGenes))]
   return(patOvGenes)
 }
 
@@ -78,51 +78,47 @@ geneMatch = function(regionIndex, generanges, genome) {
 #' genes = genePatternMatch(cogapsResult = schepCogapsResult,
 #'  generanges = schepGranges, genome = Homo.sapiens)
 #' @export
-genePatternMatch = function(cogapsResult, generanges, genome, scoreThreshold = NULL) {
+genePatternMatch <- function(cogapsResult, generanges, genome, scoreThreshold = NULL) {
   
   #get PatternMarker peak indices
-  patMarkers = CoGAPS::patternMarkers(cogapsResult)
+  patMarkers <- CoGAPS::patternMarkers(cogapsResult)
   if(is.null(scoreThreshold)){
-    peaks = patMarkers$PatternMarkers
-    nPeaks = lapply(peaks, length)
-    PMRanks = patMarkers$PatternMarkerRanks
-    regionPatList = vector(mode = "list", length = ncol(PMRanks))
+    peaks <- patMarkers$PatternMarkers
+    nPeaks <- lapply(peaks, length)
+    PMRanks <- patMarkers$PatternMarkerRanks
+    regionPatList <- vector(mode = "list", length = ncol(PMRanks))
     for(i in seq(ncol(PMRanks))) {
-      topPeaksPat = which(PMRanks[,i] %in% seq(nPeaks[[i]]))
-      regionPatList[[i]] = topPeaksPat
+      topPeaksPat <- which(PMRanks[,i] %in% seq(nPeaks[[i]]))
+      regionPatList[[i]] <- topPeaksPat
     }
   }
   else{
-    patScores = as.data.frame(patMarkers$PatternMarkerScores)
-    chr_regions = rownames(patScores)
-    regionPatList = vector(mode=  "list", length = ncol(patScores))
+    patScores <- as.data.frame(patMarkers$PatternMarkerScores)
+    chr_regions <- rownames(patScores)
+    regionPatList <- vector(mode=  "list", length = ncol(patScores))
     for(i in seq(ncol(patScores))) {
-      topPeaksPat = which(patScores[,i] < scoreThreshold)
-      regionPatList[[i]] = topPeaksPat
+      topPeaksPat <- which(patScores[,i] < scoreThreshold)
+      regionPatList[[i]] <- topPeaksPat
     }
   }
   
-  #print number of peaks used based on patternMarker score threshold
-  numPeaks = unlist(lapply(regionPatList, length))
-  names(numPeaks) = lapply(seq(length(regionPatList)),
+  #number of peaks used based on patternMarker score threshold
+  numPeaks <- unlist(lapply(regionPatList, length))
+  names(numPeaks) <- lapply(seq(length(regionPatList)),
                            function(x) {paste("Pattern", x)})
-  print("Number of peaks used for each pattern:", quote = FALSE)
-  print(numPeaks)
   
   #run the geneMatch function for every pattern
-  filenames = vector(mode = "list", length = length(regionPatList))
+  filenames <- vector(mode = "list", length = length(regionPatList))
   for(i in seq_along(regionPatList)) {
-    patgenetmp = suppressMessages(suppressWarnings(geneMatch(regionPatList[[i]],
-                                                             generanges,
-                                                             genome = genome)))
+    patgenetmp <- geneMatch(regionPatList[[i]],generanges,genome = genome)
     nam <- paste("pattern", i, "genes", sep = "")
-    filenames[i] = nam
+    filenames[i] <- nam
     assign(nam, patgenetmp)
   }
   
   #put all patterns into a double nested list to be returned as output
-  ind =paste(filenames, collapse = ",")
-  geneslist = eval(parse(text = paste("list(", ind, ")")))
+  ind <-paste(filenames, collapse = ",")
+  geneslist <- eval(parse(text = paste("list(", ind, ")")))
   
   return(geneslist)
 }

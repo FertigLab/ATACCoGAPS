@@ -11,7 +11,6 @@ cgapsPlot(
   sort = TRUE,
   patterns = NULL,
   matrix = FALSE,
-  seed = 42,
   ...
 )
 }
@@ -34,8 +33,6 @@ patterns are plotted}
 
 \item{matrix}{if false cgaps_result is interpreted as a CoGAPSResult object,
 if true it is interpreted as the pattern matrix}
-
-\item{seed}{random seed to generate colors; for reproducibility}
 
 \item{...}{addition arguments to plot function}
 }

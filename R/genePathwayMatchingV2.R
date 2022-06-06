@@ -1,29 +1,29 @@
 #function to determine matching pathways for an individual pattern
-paths = function(patGenes, pathways, pval_cut, pAdjustMethod) {
+paths <- function(patGenes, pathways, pval_cut, pAdjustMethod) {
   
   #test for pathway overlap with newGeneOverlap function from GeneOverlap
   #package
-  testList = vector(mode = "list", length = length(pathways))
+  testList <- vector(mode = "list", length = length(pathways))
   for(i in seq_along(pathways)) {
-    tmpoverlap = GeneOverlap::newGeneOverlap(patGenes, unlist(pathways[i]))
-    tmptest = GeneOverlap::testGeneOverlap(tmpoverlap)
-    testList[i] = tmptest
+    tmpoverlap <- GeneOverlap::newGeneOverlap(patGenes, unlist(pathways[i]))
+    tmptest <- GeneOverlap::testGeneOverlap(tmpoverlap)
+    testList[i] <- tmptest
   }
   
   #get p-values and threshold returned results
-  l = lapply(testList, GeneOverlap::getPval)
-  pvals =unlist(l)
-  pvals = p.adjust(pvals, pAdjustMethod)
-  inds = which(pvals < pval_cut)
-  gene_ov_objs = testList[inds]
-  paths = pathways[inds]
-  nms = names(paths)
+  l <- lapply(testList, GeneOverlap::getPval)
+  pvals <-unlist(l)
+  pvals <- p.adjust(pvals, pAdjustMethod)
+  inds <- which(pvals < pval_cut)
+  gene_ov_objs <- testList[inds]
+  paths <- pathways[inds]
+  nms <- names(paths)
   if(length(gene_ov_objs) > 0) {
-    sigpvals = unlist(lapply(gene_ov_objs, GeneOverlap::getPval))
-    df = data.frame(pathway = nms, PValue = sigpvals)
-    df = df[order(df$PValue),]
+    sigpvals <- unlist(lapply(gene_ov_objs, GeneOverlap::getPval))
+    df <- data.frame(pathway = nms, PValue = sigpvals)
+    df <- df[order(df$PValue),]
   }
-  else{df = NULL}
+  else{df <- NULL}
   return(list(gene_overlaps = gene_ov_objs, matched_pathways = paths,
               pathway_names = nms, summaryTable = df))
 }
@@ -58,35 +58,35 @@ paths = function(patGenes, pathways, pval_cut, pAdjustMethod) {
 #'
 #' matchedPathways = pathwayMatch(genes, pathways, p_threshold = 0.001)
 #' @export
-pathwayMatch = function(gene_list, pathways, p_threshold = 0.05,
+pathwayMatch <- function(gene_list, pathways, p_threshold = 0.05,
                         pAdjustMethod = "BH") {
   
   #get pathway names
-  pathways[,1] = as.factor(pathways[,1])
-  pathwayNames = levels(pathways[,1])
+  pathways[,1] <- as.factor(pathways[,1])
+  pathwayNames <- levels(pathways[,1])
   
   #convert downloaded data frame to list for use with GeneOverlap package
-  pathgene_list = vector(mode = "list", length = length(pathwayNames))
+  pathgene_list <- vector(mode = "list", length = length(pathwayNames))
   for(i in seq_along(pathwayNames)){
-    tmpgene_list = pathways[which(pathways[,1]==pathwayNames[i]), 2]
-    pathgene_list[[i]] = tmpgene_list
+    tmpgene_list <- pathways[which(pathways[,1]==pathwayNames[i]), 2]
+    pathgene_list[[i]] <- tmpgene_list
   }
-  names(pathgene_list) = pathwayNames
+  names(pathgene_list) <- pathwayNames
   
   #run paths function for each pattern
-  filenames = vector(mode = "list", length = length(gene_list))
+  filenames <- vector(mode = "list", length = length(gene_list))
   for(i in seq_along(gene_list)) {
-    tmpMatches = suppressWarnings(paths(gene_list[[i]],
+    tmpMatches <- suppressWarnings(paths(gene_list[[i]],
                                         pathgene_list, p_threshold,
                                         pAdjustMethod))
     nam <- paste("pattern", i, "genes", sep = "")
-    filenames[i] = nam
+    filenames[i] <- nam
     assign(nam, tmpMatches)
   }
   
   #put all patterns into a double nested list and return as result
-  ind =paste(filenames, collapse = ",")
-  pathwayMatches = eval(parse(text = paste("list(", ind, ")")))
+  ind <-paste(filenames, collapse = ",")
+  pathwayMatches <- eval(parse(text = paste("list(", ind, ")")))
   return(pathwayMatches)
 }
 
