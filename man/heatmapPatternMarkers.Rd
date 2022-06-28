@@ -12,7 +12,6 @@ heatmapPatternMarkers(
   colColors = NULL,
   rowColors = NULL,
   patterns = NULL,
-  seed = 42,
   order = TRUE,
   ...
 )

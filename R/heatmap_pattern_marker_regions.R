@@ -34,7 +34,7 @@
 
 heatmapPatternMarkers = function(cgaps_result, atac_data, celltypes, numregions = 50,
                                  colColors = NULL, rowColors = NULL, patterns = NULL,
-                                 seed = 42, order = TRUE,...) {
+                                 order = TRUE,...) {
 
   #convert atac read data to binary matrix
   binary_atac <- (atac_data > 0) + 0 #this line works because R represents TRUE/FALSE as 1/0
