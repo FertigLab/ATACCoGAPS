@@ -40,7 +40,7 @@ heatmapPatternMarkers = function(cgaps_result, atac_data, celltypes, numregions 
   binary_atac <- (atac_data > 0) + 0 #this line works because R represents TRUE/FALSE as 1/0
 
   #get regions corresponding to most elevated PatternMarker results
-  patMarkers <- CoGAPS::patternMarkers(cgaps_result)
+  patMarkers <- CoGAPS::patternMarkers(cgaps_result, threshold = "cut")
   patRanks <- as.data.frame(patMarkers[2])
   chr_regions <- rownames(patRanks)
   regionPatList <- vector(mode=  "list", length = ncol(patRanks))
